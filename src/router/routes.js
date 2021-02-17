@@ -13,7 +13,7 @@ const routes = [
     component: QuranMetaList,
   },
   {
-    path: "/quran-page/:surah_number",
+    path: "/quran-page",
     name: "QuranPage",
     component: QuranPageList,
   },

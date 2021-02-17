@@ -8,7 +8,6 @@
     <div class="flex items-center justify-center my-10 space-x-4">
       <router-link to="/" type="button" class="py-3 px-4 transition-colors bg-green-500 hover:bg-green-400 rounded text-gray-100">Dokumentasi</router-link>
       <router-link to="/metadata" type="button" class="py-3 px-4 transition-colors bg-green-500 hover:bg-green-400 rounded text-gray-100">Mulai</router-link>
-      <router-link :to="{name: 'QuranPage', params:{surah_number: 1}}" type="button" class="py-3 px-4 transition-colors bg-green-500 hover:bg-green-400 rounded text-gray-100">Page</router-link>
     </div>
     <p class="text-center text-sm text-gray-400">From Eko Sutrisno &copy;{{new Date().getFullYear()}} All right reserved</p>
   </div>
