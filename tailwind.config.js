@@ -1,11 +1,26 @@
 module.exports = {
   purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
-  darkMode: false,
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        quran: {
+          100: "#EFF8F8",
+        },
+      },
+      fontFamily: {
+        quran: ["lpmq", "Arial", "sans-serif"],
+        exo: ["Quicksand"],
+      },
+      scale: {
+        quran: "1.005",
+      },
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+      transform: ["hover", "focus"],
+    },
   },
   plugins: [],
 };

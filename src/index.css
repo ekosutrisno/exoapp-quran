@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "lpmq";
+  src: url(assets/font/lpmq.ttf);
+  font-display: swap;
+  line-height: 2;
+}
+
+@layer utilities {
+  @responsive {
+    .on-scrollbar {
+      scrollbar-width: thin; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+    }
+    .on-scrollbar::-webkit-scrollbar-track {
+      box-shadow: none !important;
+      background-color: transparent !important;
+    }
+    .on-scrollbar::-webkit-scrollbar {
+      width: 10px !important;
+      background-color: transparent;
+    }
+    .on-scrollbar::-webkit-scrollbar-thumb {
+      --tw-bg-opacity: 1;
+      background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+    }
+  }
+}
+
+div * {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+div *::-webkit-scrollbar-track {
+  box-shadow: none !important;
+  background-color: transparent;
+}
+div *::-webkit-scrollbar {
+  width: 3px !important;
+  background-color: transparent;
+}
+div *::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
