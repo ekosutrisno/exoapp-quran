@@ -1,5 +1,9 @@
 <template>
-   <div class="bg-gray-200 min-h-screen">
+   <div v-if="isProcess" class="absolute flex items-center justify-center inset-0 z-50 bg-opacity-50 bg-gray-900">
+         <Spinner/>
+   </div>
+   <div class="bg-gray-200 min-h-screen nv-transition">
+      <div ref="pageUp"></div>
       <section class="w-full min-w-min h-1/2 bg-gray-900 py-6 relative">
          <div class="max-w-7xl mx-auto p-4 relative">
             <button @click="back" class="absolute text-gray-300 transition focus:outline-none left-10 hover:text-gray-100">
@@ -13,8 +17,8 @@
                </svg>
             </router-link>
             <div class="text-center">
-               <div class="w-20 h-20  mx-auto border-2 rounded-full relative">
-                  <div class="w-full h-full flex items-center justify-center rounded-full bg-yellow-200">
+               <div class="w-20 h-20 mx-auto rounded-full relative">
+                  <div class="w-full h-full flex items-center justify-center rounded-full bg-gray-200">
                         <h1 class="text-3xl font-semibold"> {{surah.id}} </h1>
                   </div>
                   <div class="rounded-full z-50 cursor-pointer p-1 inline-flex items-center absolute w-8 h-8 -right-3 bottom-0 bg-gray-50 ring-1 ring-gray-200">
@@ -34,25 +38,21 @@
          </div>
    </section>
    <section class="min-w-min bg-gray-200 pt-20 min-h-full">
-      <div class="font-quran text-center mb-4 text-sm font-semibold"> {{surah.surat_text_full}} </div>
-      <div class="font-quran text-center mb-2 text-xl font-semibold">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-      <p class="text-center mb-10 text-gray-600">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
      <div  class="max-w-7xl mx-auto px-4 pb-4 flex flex-col items-end space-y-2">
-        <div v-for="ayat in ayats" :key="ayat.id" class="w-full group text-gray-600 hover:bg-gray-100 py-4 transition max-w-screen-md mx-auto font-quran font-semibold text-right px-4 text-xl rounded-bl-xl border-r-4 border-transparent cursor-pointer hover:border-gray-400 hover:shadow">
-         <p> 
-            <span class="group-hover:text-gray-900 leading-10">{{ayat.aya_text}}</span>   
-            <span class="text-xl text-yellow-700 font-mono"> -{{convertToArab(ayat.aya_number)}}</span> 
-         </p> 
-         <p class="text-base font-normal text-left"> <span class="font-semibold">[{{ayat.sura_id}}:{{ayat.aya_number}}] </span> - <span class="font-semibold text-purple-600">Juz {{ayat.juz_id}}</span> |{{ayat.translation_aya_text}}</p>
+        <div class="mb-4 mx-auto">
+            <div class="font-quran text-center mb-4 text-sm font-semibold"><span class="text-sm font-normal">({{surah.surat_golongan}})</span> | {{surah.surat_text_full}} </div>
+            <div class="font-quran text-center mb-2 text-xl font-semibold">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+            <p class="text-center text-sm text-gray-600">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
         </div>
+        <QuranAyatCard v-for="ayat in ayats" :key="ayat.aya_id" :ayat="ayat"/>
      </div>
      <div class="flex items-center justify-center">
-         <button class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-l-lg bg-purple-200 hover:bg-purple-300 focus:ring-1 focus:ring-purple-300 focus:outline-none"><span>
+         <button @click="previousAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-l-lg bg-purple-200 hover:bg-purple-300 focus:ring-1 focus:ring-purple-300 focus:outline-none"><span>
             <svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-            </svg></span> <span>Surat Sebelum</span> 
+            </svg></span> <span>Ayat Sebelum</span> 
          </button>
-        <button class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-r-lg bg-purple-200 hover:bg-purple-300 focus:ring-1 focus:ring-purple-300 focus:outline-none"><span>Surat Sesudah</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <button @click="nextAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-r-lg bg-purple-200 hover:bg-purple-300 focus:ring-1 focus:ring-purple-300 focus:outline-none"><span>Ayat Sesudah</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
          <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
          </svg></span> 
       </button>
@@ -63,18 +63,24 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive, toRefs } from 'vue';
+import { computed, onMounted, reactive, ref, toRefs } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
+import QuranAyatCard from '../components/QuranAyatCard.vue';
+import Spinner from '../components/Spinner.vue';
 export default {
+  components: { QuranAyatCard, Spinner },
    setup(){
       const store = useStore();
       const route = useRoute();
       const router = useRouter();
 
       const state = reactive({
+         isProcess: computed(()=> store.state.surah.isLoading),
          surah: computed(()=> store.state.surah.surah),
-         ayats: computed(()=> store.state.surah.ayahs)
+         ayats: computed(()=> store.state.surah.ayahs),
+         lastAyahVisible: computed(()=> store.state.surah.lastAyahVisible),
+         firstAyahVisible: computed(()=> store.state.surah.firstAyahVisible),
       })
 
       onMounted( async ()=>{ 
@@ -88,9 +94,11 @@ export default {
       const convertToArab = (str) => {
          var find = ['0','1','2','3','4','5','6','7','8','9'];
          var replace = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-         for (var i = 0; i < find.length; i++) {
-             str = str.toString().replace(new RegExp(find[i],"g"), replace[i]);
-         }
+
+         if(str !== undefined)
+            for (var i = 0; i < find.length; i++) {
+               str = str.toString().replace(new RegExp(find[i],"g"), replace[i]);
+            }
 
          return str;
       };
@@ -99,22 +107,39 @@ export default {
          router.back();
       }
 
-      const previousSurat = async () =>{
-         let nomor_surat = route.query.surah_number;
-         await store.dispatch('surah/setSurah', nomor_surat - 1);
-         console.log(nomor_surat);
+      const previousAyat = async () =>{
+         var data = {
+            firstVisible: state.firstAyahVisible,
+            surah_id: route.query.surah_number
+         }
+         await store.dispatch('surah/prevPage', data);
+
+         scrollToPageUp();
       }
-      const nextSurat = async ()=>{
-         let nomor_surat = route.query.surah_number;
-         await store.dispatch('surah/setSurah', nomor_surat + 1);
-         console.log(nomor_surat);
+
+      const nextAyat = async ()=>{
+         var data = {
+            lastVisible: state.lastAyahVisible,
+            surah_id: route.query.surah_number
+         }
+         await store.dispatch('surah/nextPage', data);
+
+         scrollToPageUp();
       }
+
+      const pageUp = ref(null)
+      const scrollToPageUp = () => {
+         pageUp.value.scrollIntoView({behavior: 'smooth'});
+      }
+
 
       return{
          ...toRefs(state),
+         pageUp,
+         scrollToPageUp,
          convertToArab,
-         previousSurat,
-         nextSurat,
+         previousAyat,
+         nextAyat,
          back
       }
    }

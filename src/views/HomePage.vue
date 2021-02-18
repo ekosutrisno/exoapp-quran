@@ -1,5 +1,6 @@
 <template>
-  <div class="h-full min-h-screen">
+<div class="h-screen flex items-center justify-center">
+  <div class="nv-transition">
     <img class="mx-auto" alt="Vue logo" src="../assets/logo.png" />
     <div class="text-center ">
       <h1 class="text-3xl font-semibold text-gray-300">Welcome to ExoApp Qur'an</h1>
@@ -11,6 +12,7 @@
     </div>
     <p class="text-center text-sm text-gray-400">From Eko Sutrisno &copy;{{new Date().getFullYear()}} All right reserved</p>
   </div>
+</div>
 </template>
 <script>
 export default {

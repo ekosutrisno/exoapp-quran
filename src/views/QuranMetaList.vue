@@ -1,8 +1,5 @@
 <template>
-<div v-if="isProcess" class="absolute flex items-center justify-center inset-0 z-50 bg-opacity-50 bg-gray-900">
-      <Spinner/>
-</div>
-<div class="min-h-screen bg-gray-200">
+<div class="min-h-screen bg-gray-200 nv-transition">
   <section class="w-full min-w-min h-1/3 bg-gray-900 py-6 relative">
       <div class="max-w-7xl mx-auto p-4 relative">
          <router-link to="/" class="absolute text-gray-300 transition left-10 hover:text-gray-100">
@@ -28,12 +25,15 @@
          </div>
       </div>
   </section>
-  <section class="min-w-min bg-gray-300 pt-10 h-full">
+  <section class="min-w-min bg-gray-300 pt-10">
      <div class="max-w-7xl mx-auto p-2 mb-4 sticky top-0 z-30">
          <div class="w-full px-2 flex items-center justify-center">
             <input v-model="searchInput" @input="onSearch"  type="text" placeholder="Search surah..."  class="py-3 px-4 shadow-xl rounded w-full max-w-lg mt-6 focus:outline-none ring-2 ring-gray-400 ring-opacity-30 focus:ring-opacity-60"/>
          </div>
      </div>
+     <div v-if="isProcess" class="flex items-center justify-center nv-transition">
+      <Spinner/>
+      </div>
      <div v-if="searching" class="max-w-7xl mx-auto px-4 pb-4 grid md:grid-cols-2 lg:grid-cols-4 gap-2">
          <QuranMetaCard v-for="surah in surahSearchResult" :key="surah.number" :surah="surah" data-aos="fade-up" data-aos-anchor-placement="top-bottom"/>
      </div>
@@ -50,7 +50,7 @@
 </div>
 </template>
 <script>
-import { computed, onMounted, reactive, toRefs } from 'vue';
+import { computed, reactive, toRefs } from 'vue';
 import QuranMetaCard from '../components/QuranMetaCard.vue';
 import { useStore } from 'vuex';
 import Spinner from '../components/Spinner.vue';
@@ -61,23 +61,11 @@ export default {
       const store = useStore();
 
       const state = reactive({
-         isProcess: false,
+         isProcess: computed(()=> store.state.surah.isLoading),
          searchInput: '',
          surahs: computed(()=> store.state.surah.surahs),
          surahSearchResult: []
       })
-
-      onMounted( () =>{
-        getSurahData();
-      })
-
-      const getSurahData = async () =>{
-         state.isProcess = true;
-         await store.dispatch('surah/setSurahs');
-         setTimeout(() => {
-            state.isProcess = false;
-         }, 1000);
-      }
 
       const searching = computed(()=> state.searchInput.trim() !== '');
 
