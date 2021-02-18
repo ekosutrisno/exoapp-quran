@@ -34,6 +34,7 @@
          </div>
    </section>
    <section class="min-w-min bg-gray-200 pt-20 min-h-full">
+      <div class="font-quran text-center mb-4 text-sm font-semibold"> {{surah.surat_text_full}} </div>
       <div class="font-quran text-center mb-2 text-xl font-semibold">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
       <p class="text-center mb-10 text-gray-600">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
      <div  class="max-w-7xl mx-auto px-4 pb-4 flex flex-col items-end space-y-2">
