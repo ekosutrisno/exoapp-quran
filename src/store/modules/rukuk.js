@@ -5,111 +5,66 @@ const rukuk = {
   state: () => {
     return {
       isLoading: false,
-      surahs: [],
-      surah: {},
-      ayahs: [],
+      rukuk: [],
       ayahsPagination: [],
-      firstAyahVisible: {},
-      lastAyahVisible: {},
+      firstRukukVisible: {},
+      lastRukukVisible: {},
     };
   },
   mutations: {
     SET_IS_LOADING: (state, loading) => (state.isLoading = loading),
-    SET_SURAHS: (state, data) => (state.surahs = data),
-    SET_SURAH: (state, data) => (state.surah = data),
-    SET_AYAH: (state, data) => (state.ayahs = data),
-    SET_AYAH_PAGINATE: (state, data) => (state.ayahsPagination = data),
-    SET_AYAH_FIRSTV: (state, data) => (state.firstAyahVisible = data),
-    SET_AYAH_LASTV: (state, data) => (state.lastAyahVisible = data),
+    SET_RUKUK: (state, data) => (state.rukuk = data),
+    SET_RUKUK_FIRSTV: (state, data) => (state.firstRukukVisible = data),
+    SET_RUKUK_LASTV: (state, data) => (state.lastRukukVisible = data),
   },
   actions: {
-    async setSurahs({ commit }) {
+    async setRukuk({ commit, dispatch }) {
       commit("SET_IS_LOADING", true);
 
       firestore
-        .collection("surah_menu_collection")
-        .orderBy("id", "asc")
+        .collection("rukuk_collections")
+        .orderBy("number", "asc")
+        .limit(25)
         .get()
 
         .then((menu) => {
           let dataMenu = [];
 
+          var fisrtVisible = menu.docs[0];
+          dispatch("setRukukFirstVisible", fisrtVisible);
+
+          var lastVisible = menu.docs[menu.docs.length - 1];
+          dispatch("setRukukLastVisible", lastVisible);
+
           menu.docs.forEach((surah) => {
             dataMenu.push(surah.data());
           });
 
-          commit("SET_SURAHS", dataMenu);
+          commit("SET_RUKUK", dataMenu);
           commit("SET_IS_LOADING", false);
         });
     },
 
-    setAyah({ commit, dispatch }, surah_id) {
-      commit("SET_IS_LOADING", true);
-
-      firestore
-        .collection("surah_collections")
-        .doc(surah_id)
-        .collection("ayahs")
-        .orderBy("aya_number", "asc")
-        .limit(20)
-        .get()
-        .then((ayah) => {
-          var fisrtVisible = ayah.docs[0];
-          dispatch("setAyahFirstVisible", fisrtVisible);
-
-          var lastVisible = ayah.docs[ayah.docs.length - 1];
-          dispatch("setAyahLastVisible", lastVisible);
-
-          let dataAyah = [];
-
-          ayah.forEach((doc) => {
-            dataAyah.push(doc.data());
-          });
-
-          commit("SET_AYAH", dataAyah);
-          commit("SET_IS_LOADING", false);
-        });
+    setRukukFirstVisible({ commit }, firstVisible) {
+      commit("SET_RUKUK_FIRSTV", firstVisible);
+    },
+    setRukukLastVisible({ commit }, lastVisible) {
+      commit("SET_RUKUK_LASTV", lastVisible);
     },
 
-    setAyahFirstVisible({ commit }, firstVisible) {
-      commit("SET_AYAH_FIRSTV", firstVisible);
-    },
-    setAyahLastVisible({ commit }, lastVisible) {
-      commit("SET_AYAH_LASTV", lastVisible);
-    },
-
-    setSurah({ commit, dispatch }, surah_number) {
-      commit("SET_IS_LOADING", true);
-
-      let surah_no = surah_number ? surah_number : "1";
-
-      firestore
-        .collection("surah_collections")
-        .doc(surah_no.toString())
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            commit("SET_SURAH", doc.data());
-            dispatch("setAyah", doc.data().id.toString());
-            commit("SET_IS_LOADING", false);
-          }
-        });
-    },
     prevPage({ commit, dispatch }, data) {
       var next = firestore
-        .collection("surah_collections")
-        .doc(data.surah_id)
-        .collection("ayahs")
-        .orderBy("aya_number", "asc")
+        .collection("rukuk_collections")
+        .orderBy("number", "asc")
         .endBefore(data.firstVisible)
-        .limitToLast(20);
+        .limitToLast(25);
 
       next.get().then((doc) => {
         var fisrtVisible = doc.docs[0];
-        dispatch("setAyahFirstVisible", fisrtVisible);
+        dispatch("setRukukFirstVisible", fisrtVisible);
 
         var lastVisible = doc.docs[doc.docs.length - 1];
-        dispatch("setAyahLastVisible", lastVisible);
+        dispatch("setRukukLastVisible", lastVisible);
 
         let tempData = [];
 
@@ -117,24 +72,24 @@ const rukuk = {
           tempData.push(ayat.data());
         });
 
-        commit("SET_AYAH", tempData);
+        commit("SET_RUKUK", tempData);
       });
     },
     nextPage({ commit, dispatch }, data) {
       var next = firestore
-        .collection("surah_collections")
+        .collection("rukuk_collections")
         .doc(data.surah_id)
         .collection("ayahs")
         .orderBy("aya_number", "asc")
         .startAfter(data.lastVisible)
-        .limit(20);
+        .limit(25);
 
       next.get().then((doc) => {
         var fisrtVisible = doc.docs[0];
-        dispatch("setAyahFirstVisible", fisrtVisible);
+        dispatch("setRukukFirstVisible", fisrtVisible);
 
         var lastVisible = doc.docs[doc.docs.length - 1];
-        dispatch("setAyahLastVisible", lastVisible);
+        dispatch("setRukukLastVisible", lastVisible);
 
         let tempData = [];
 
@@ -142,7 +97,7 @@ const rukuk = {
           tempData.push(ayat.data());
         });
 
-        commit("SET_AYAH", tempData);
+        commit("SET_RUKUK", tempData);
       });
     },
   },

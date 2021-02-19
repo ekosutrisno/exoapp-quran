@@ -1,7 +1,7 @@
 <template>
    <div class="h-screen flex items-center flex-col">
       <div class="flex-none relative flex items-end flex-shrink-0 w-full bg-gradient-to-b from-gray-900 to-gray-700 h-1/4">
-         <div class="absolute top-4 left-4 text-gray-200 text-xl">Qur'an</div>
+         <div class="absolute top-4 left-4 text-gray-200 text-xl">E-Qur'an</div>
          <div class="bg-gray-100 h-16 w-36 z-50 mx-auto p-4 absolute left-4 -bottom-10 rounded-lg">
             <div class="flex items-center justify-between">
                <div class="w-8 h-8 rounded p-1">
@@ -39,7 +39,7 @@
                   <div class="font-semibold">Manzil</div>
                </div>
             </router-link>
-            <router-link to="/rukuk-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
+            <router-link to="/menu" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -77,11 +77,21 @@
 </template>
 
 <script>
-   export default {
-      
+import { computed, reactive, toRefs } from 'vue'
+import { useStore } from 'vuex'
+export default {
+   setup(){
+      const { state} = useStore();
+
+      const data = reactive({
+         rukuk: computed(()=> state.rukuk.rukuk),
+         firstRukukVisible: computed(()=> state.rukuk.firstRukukVisible),
+         lastRukukVisible: computed(()=> state.rukuk.lastRukukVisible),
+      })
+
+      return{
+         ...toRefs(data)
+      }
    }
+}
 </script>
-
-<style scoped>
-
-</style>

@@ -3,7 +3,7 @@
   <div class="nv-transition w-full max-w-screen-sm">
     <img class="mx-auto w-40" alt="Vue logo" src="../assets/logo.png" />
     <div class="text-center ">
-      <h1 class="text-xl font-semibold text-gray-300">Qur'an</h1>
+      <h1 class="text-xl font-semibold text-gray-300">E-Qur'an</h1>
       <p class="text-gray-400 text-sm font-normal">Read and Study Alqur'an anywhere.</p>
     </div>
     <div class="flex items-center justify-center my-10 space-x-4">
