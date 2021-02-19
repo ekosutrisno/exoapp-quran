@@ -5,6 +5,7 @@
      <button @click="insertSajda" class="text-white m-2 py-2 px-6 bg-green-500">Sajda</button>
      <button @click="insertManzil" class="text-white m-2 py-2 px-6 bg-green-500">Manzil</button>
      <button @click="insertRukuk" class="text-white m-2 py-2 px-6 bg-green-500">Rukuk</button>
+     <button @click="insertJuz" class="text-white m-2 py-2 px-6 bg-green-500">Juz</button>
   </div>
 </template>
 
@@ -18,7 +19,8 @@ export default {
        dataJson: [],
        sajda: [],
        rukuk: [],
-       manzil: [],
+       manzil:[],
+       juz: []
     })
 
 
@@ -81,47 +83,80 @@ export default {
     };
 
     const insertSajda = () =>{
+
+       let id = 1;
        state.sajda.forEach(async element => {
 
           const data = {
+            number: id,
             ayat: element.ayah,
             recommended: element.recommended,
             obligatory: element.obligatory,
             surat: element.surah
           }
+          id++;
         await firestore
                 .collection("sajda_collections")
-                .add(data)
+                .doc(data.number.toString())
+                .set(data)
                 .then(()=>console.log("added"));
 
        });
     }
 
     const insertManzil = () =>{
+       let id = 1;
        state.manzil.forEach(async element => {
 
+
           const data = {
+            number: id,
             ayat: element.ayah,
             surat: element.surah
           }
+
+          id++;
         await firestore
                 .collection("manzil_collections")
-                .add(data)
+                .doc(data.number.toString())
+                .set(data)
                 .then(()=>console.log("added"));
 
        });
     }
 
     const insertRukuk = () =>{
+       let id = 1;
        state.rukuk.forEach(async element => {
 
           const data = {
+            number: id,
             ayat: element.ayah,
             surat: element.surah
           }
+          id++;
         await firestore
                 .collection("rukuk_collections")
-                .add(data)
+                .doc(data.number.toString())
+                .set(data)
+                .then(()=>console.log("added"));
+
+       });
+    }
+    const insertJuz = () =>{
+       let id = 1;
+       state.juz.forEach(async element => {
+
+          const data = {
+            number: id,
+            ayat: element.ayah,
+            surat: element.surah
+          }
+          id++;
+        await firestore
+                .collection("juz_collections")
+                .doc(data.number.toString())
+                .set(data)
                 .then(()=>console.log("added"));
 
        });
@@ -133,7 +168,8 @@ export default {
        insertDataInd,
        insertSajda,
        insertManzil,
-       insertRukuk
+       insertRukuk,
+       insertJuz
     }
   },
 };

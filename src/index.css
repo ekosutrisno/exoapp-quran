@@ -32,6 +32,12 @@
   }
 }
 
+.the-header {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  background-color: hsla(0, 0%, 100%, 0.75);
+}
+
 div * {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */

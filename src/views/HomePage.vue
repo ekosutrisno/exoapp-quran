@@ -1,20 +1,16 @@
 <template>
 <div class="h-screen flex items-center justify-center">
-  <div class="nv-transition">
-    <img class="mx-auto" alt="Vue logo" src="../assets/logo.png" />
+  <div class="nv-transition w-full max-w-screen-sm">
+    <img class="mx-auto w-40" alt="Vue logo" src="../assets/logo.png" />
     <div class="text-center ">
-      <h1 class="text-3xl font-semibold text-gray-300">Welcome to ExoApp Qur'an</h1>
-      <p class="text-gray-400 font-normal">Read and Study Alqur'an anywhere.</p>
+      <h1 class="text-xl font-semibold text-gray-300">Qur'an</h1>
+      <p class="text-gray-400 text-sm font-normal">Read and Study Alqur'an anywhere.</p>
     </div>
     <div class="flex items-center justify-center my-10 space-x-4">
-      <router-link to="/" type="button" class="py-3 px-4 transition-colors bg-green-500 hover:bg-green-400 rounded text-gray-100">Dokumentasi</router-link>
-      <router-link to="/metadata" type="button" class="py-3 px-4 transition-colors bg-green-500 hover:bg-green-400 rounded text-gray-100">Mulai</router-link>
+      <router-link to="/menu" type="button" class="py-3 px-4 transition-colors bg-green-500 hover:bg-green-400 rounded text-gray-100">Beranda</router-link>
     </div>
-    <p class="text-center text-sm text-gray-400">From Eko Sutrisno &copy;{{new Date().getFullYear()}} All right reserved</p>
+    <p class="text-center text-sm text-gray-400">Eko Sutrisno & Safrizal <br> &copy;{{new Date().getFullYear()}} All right reserved</p>
   </div>
 </div>
 </template>
-<script>
-export default {
-}
-</script>
+// <a href='https://pngtree.com/so/quran'>quran png from pngtree.com</a>

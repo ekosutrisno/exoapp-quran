@@ -31,5 +31,18 @@ setup(){
   }
 }
 
+.hero-background {
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 400px;
+  overflow: hidden;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 70%,
+      rgba(229, 231, 235, 0)
+    ),
+    url(https://webassets.mongodb.com/_com_assets/cms/dots_hero-i42f3gz25y.png);
+}
+
 </style>
 

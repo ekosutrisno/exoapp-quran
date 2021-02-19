@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       colors: {
         quran: {
-          100: "#EFF8F8",
+          "gray-100": "#F7F7F7",
+          "brown-text": "#584810",
         },
       },
       fontFamily: {
