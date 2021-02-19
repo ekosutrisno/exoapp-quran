@@ -7,7 +7,7 @@ import store from "./store";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-AOS.init();
+AOS.init({ mirror: true });
 
 createApp(App)
   .use(store)

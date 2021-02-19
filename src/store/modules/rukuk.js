@@ -1,6 +1,6 @@
 import { firestore } from "../../service/firebase";
 
-const surah = {
+const rukuk = {
   namespaced: true,
   state: () => {
     return {
@@ -148,4 +148,4 @@ const surah = {
   },
 };
 
-export default surah;
+export default rukuk;

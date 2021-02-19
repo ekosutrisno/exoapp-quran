@@ -12,6 +12,8 @@ setup(){
     
     onMounted(async ()=>{ 
         await store.dispatch('surah/setSurahs');
+        await store.dispatch('sajda/setSajda');
+        await store.dispatch('juz/setJuz');
     })
 }
 }

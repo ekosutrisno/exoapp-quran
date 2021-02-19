@@ -7,8 +7,8 @@
         <span class="font-bold text-lg text-gray-800">
           {{ surah.surat_name }}
         </span>
-      <p class="text-sm text-gray-600"><span class="font-semibold"> {{ surah.surat_terjemahan}}.</span></p>
-      <p class="text-xs text-gray-500"><span class="font-semibold"> {{ surah.count_ayat}} ayat.</span></p>
+      <p class="text-sm text-gray-600"><span class="font-semibold"> {{ surah.surat_terjemahan}}</span></p>
+      <p class="text-xs text-gray-500"><span class="font-semibold"> {{ surah.count_ayat}} ayat</span></p>
       </div>
       <div class="text-gray-900 w-10 h-10 rounded-full bg-gray-200 ring-1 ring-gray-300 ring-opacity-90 flex items-center justify-center font-semibold">
          {{ surah.id }}

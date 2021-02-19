@@ -14,7 +14,7 @@
                   </div>
                   <img class="object-cover" src="https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" alt="my-avatar">
                </div>
-               <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Surah</h1>
+               <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Juz</h1>
                <p class="font-semibold text-gray-100 md:text-lg text-center">Read and Study Alqur'an anywhere.</p>
          </div>
          <div class="w-full md:mx-auto max-w-3xl -mb-24 bg-gray-100 z-40 mt-4 rounded-lg h-16">
@@ -25,25 +25,12 @@
          </div>
       </div>
   </section>
-  <section class="min-w-min bg-gray-200 pt-10 hero-background">
-     <div class="max-w-7xl mx-auto p-2 mb-4 sticky top-0 z-30">
-         <div class="w-full px-2 flex items-center justify-center">
-            <input v-model="searchInput"  type="text" placeholder="Search surah..."  class="py-3 px-4 rounded w-full max-w-lg mt-6 focus:outline-none ring-2 ring-green-300 ring-opacity-75 focus:ring-opacity-60 the-header"/>
-         </div>
-     </div>
+  <section class="min-w-min bg-gray-200 pt-20 hero-background">
      <div v-if="isProcess" class="flex items-center justify-center nv-transition">
       <Spinner/>
       </div>
-     <div v-if="searching" class="max-w-7xl mx-auto px-4 pb-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-         <QuranMetaCard v-for="surah in onSearch" :key="surah.number" :surah="surah" data-aos="fade-up" data-aos-anchor-placement="top-bottom"/>
-     </div>
-     <div v-else class="max-w-7xl mx-auto px-4 pb-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-         <QuranMetaCard v-for="surah in surahs" :key="surah.number" :surah="surah" data-aos="fade-up" data-aos-anchor-placement="top-bottom"/>
-     </div>
-     <div v-if="onSearch.length = 0 " class="max-w-7xl text-center mx-auto px-4 pb-4">
-       <div class="h-48 w-72 rounded-lg bg-gray-100 text-gray-800 mx-auto p-4">
-           <h1 class="text-center font-semibold">Data Not Found</h1>
-       </div>
+     <div v-else class="max-w-7xl mx-auto px-4 pb-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+         <QuranJuzCard v-for="juz in juzs" :key="juz.number" :juz="juz" data-aos="fade-up" data-aos-anchor-placement="top-bottom"/>
      </div>
   </section>
     <p class="text-center text-sm py-5 text-gray-700">From ExoApp &copy;{{new Date().getFullYear()}} All right reserved</p> 
@@ -52,39 +39,21 @@
 <script>
 import { computed, reactive, toRefs } from 'vue';
 import { useStore } from 'vuex';
-import QuranMetaCard from '../components/QuranMetaCard.vue';
 import Spinner from '../components/Spinner.vue';
+import QuranJuzCard from '../components/QuranJuzCard.vue';
 export default {
-  components: { QuranMetaCard, Spinner },
+  components: {  Spinner, QuranJuzCard },
    setup(){
 
       const store = useStore();
 
       const state = reactive({
          isProcess: computed(()=> store.state.surah.isLoading),
-         searchInput: '',
-         surahs: computed(()=> store.state.surah.surahs),
+         juzs: computed(()=> store.state.juz.juz),
       })
 
-      const searching = computed(()=> state.searchInput.trim() !== '');
-
-      const onSearch = computed(()=>{
-         var searchData = state.surahs.filter(post => {
-            return post.surat_name
-            .toLowerCase()
-            .replace(/[-']+/g,'')
-            .includes(
-               state.searchInput.toLowerCase()
-            )
-         });
-         
-         return searchData;
-      
-      })
       return{
-         ...toRefs(state),
-         onSearch,
-         searching
+         ...toRefs(state)
       }
    }
 }
