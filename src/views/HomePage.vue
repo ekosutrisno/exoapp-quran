@@ -13,4 +13,3 @@
   </div>
 </div>
 </template>
-// <a href='https://pngtree.com/so/quran'>quran png from pngtree.com</a>

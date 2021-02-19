@@ -29,13 +29,12 @@
       background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
       border-radius: 4px;
     }
+    .the-header {
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      background-color: hsla(0, 0%, 100%, 0.45);
+    }
   }
-}
-
-.the-header {
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  background-color: hsla(0, 0%, 100%, 0.75);
 }
 
 div * {

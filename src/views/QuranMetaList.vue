@@ -1,6 +1,6 @@
 <template>
-<div class="min-h-screen bg-gray-200 nv-transition">
-  <section class="w-full min-w-min h-1/3 bg-gray-900 py-6 relative">
+<div class="min-h-screen h-screen bg-gray-200 nv-transition">
+  <section class="w-full min-w-min bg-gray-900 py-6 relative">
       <div class="max-w-7xl mx-auto p-4 relative">
          <router-link to="/menu" class="absolute text-gray-300 transition left-10 hover:text-gray-100">
             <svg class="w-6 md:w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -8,16 +8,16 @@
             </svg>
       </router-link>
          <div class="text-center">
-               <div class="w-16 mx-auto border-2 ring-2 ring-gray-200 border-gray-50 rounded-full relative">
+               <div class="w-16 h-16 mx-auto border-2 ring-2 ring-gray-200 border-gray-50 rounded-full relative">
                   <div class="rounded-full cursor-pointer p-1 inline-flex items-center absolute w-8 h-8 -right-3 bottom-0 bg-gray-50 ring-1 ring-gray-200">
                      <span class="mx-auto">😻</span>
                   </div>
                   <img class="object-cover" src="https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" alt="my-avatar">
                </div>
-               <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">ExoApp Qur'an</h1>
+               <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Qur'an</h1>
                <p class="font-semibold text-gray-100 md:text-lg text-center">Read and Study Alqur'an anywhere.</p>
          </div>
-         <div class="w-full md:mx-auto max-w-3xl -mb-24 bg-white z-40 mt-4 rounded-lg h-16">
+         <div class="w-full md:mx-auto max-w-3xl -mb-24 bg-gray-100 z-40 mt-4 rounded-lg h-16">
                <div class="flex flex-col md:flex-row items-center justify-center text-xl md:text-3xl divide-y md:divide-y-0 md:divide-x h-full">
                   <div class="px-4 w-full text-center font-semibold text-green-600">ExoApp</div>
                   <div class="px-4 w-full text-center font-semibold text-cyan-600">Qur'an</div>
@@ -28,7 +28,7 @@
   <section class="min-w-min bg-gray-200 pt-10 hero-background">
      <div class="max-w-7xl mx-auto p-2 mb-4 sticky top-0 z-30">
          <div class="w-full px-2 flex items-center justify-center">
-            <input v-model="searchInput" @input="onSearch"  type="text" placeholder="Search surah..."  class="py-3 px-4 shadow-xl rounded w-full max-w-lg mt-6 focus:outline-none ring-2 ring-gray-400 ring-opacity-30 focus:ring-opacity-60"/>
+            <input v-model="searchInput" @input="onSearch"  type="text" placeholder="Search surah..."  class="py-3 px-4 rounded w-full max-w-lg mt-6 focus:outline-none ring-2 ring-green-300 ring-opacity-75 focus:ring-opacity-60 the-header"/>
          </div>
      </div>
      <div v-if="isProcess" class="flex items-center justify-center nv-transition">
@@ -46,7 +46,7 @@
        </div>
      </div>
   </section>
-    <p class="text-center text-sm py-5 text-gray-700">From Eko Sutrisno &copy;{{new Date().getFullYear()}} All right reserved</p> 
+    <p class="text-center text-sm py-5 text-gray-700">From ExoApp &copy;{{new Date().getFullYear()}} All right reserved</p> 
 </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
 <router-link :to="{path: '/quran-page', query:{surah_number: surah.id}}">
-   <div class="bg-gray-100 hover:shadow-lg font-quran group border-2 border-transparent hover:border-gray-400 hover:border-opacity-75 transition cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-lg p-5">
+   <div class="bg-gray-100 bg-opacity-90 hover:shadow-lg font-quran group border-2 border-transparent hover:border-gray-400 hover:border-opacity-75 transition cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-lg p-5">
 
     <div class="w-full flex items-start py-2 justify-between">
       <div>

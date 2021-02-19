@@ -29,7 +29,7 @@
                <h1 class="text-3xl md:text-4xl text-gray-100 font-quran"> {{surah.surat_name}} </h1>
                <p class="font-semibold text-yellow-300 md:text-lg text-center"> {{surah.surat_terjemahan}}</p>
             </div>
-            <div class="w-full mx-auto max-w-sm -mb-24 bg-white z-40 mt-4 rounded-lg h-16 sticky top-0">
+            <div class="w-full mx-auto max-w-sm -mb-24 bg-white z-40 mt-4 rounded-lg h-16">
                <div class="flex flex-col md:flex-row items-center justify-center text-xl md:text-3xl divide-y md:divide-y-0 md:divide-x h-full">
                   <div class="px-4 w-full text-center font-semibold text-green-600"> {{surah.count_ayat}}/<span class="font-serif leading-8">{{convertToArab(surah.count_ayat)}}</span> </div>
                   <div class="px-4 w-full text-center font-semibold text-cyan-600"> Ayat </div>
@@ -47,12 +47,12 @@
         <QuranAyatCard v-for="ayat in ayats" :key="ayat.aya_id" :ayat="ayat"/>
      </div>
      <div class="flex items-center my-4 justify-center">
-         <button @click="previousAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-l-lg bg-purple-400 hover:bg-purple-300 focus:ring-1 focus:ring-purple-300 focus:outline-none"><span>
+         <button @click="previousAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-l-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:ring-1 focus:ring-green-500 focus:outline-none"><span>
             <svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
             </svg></span> <span>Ayat Sebelum</span> 
          </button>
-        <button @click="nextAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-r-lg bg-purple-400 hover:bg-purple-300 focus:ring-1 focus:ring-purple-300 focus:outline-none"><span>Ayat Sesudah</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <button @click="nextAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-r-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:ring-1 focus:ring-green-500 focus:outline-none"><span>Ayat Sesudah</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
          <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
          </svg></span> 
       </button>
