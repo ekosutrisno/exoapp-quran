@@ -20,14 +20,12 @@
       background-color: transparent !important;
     }
     .on-scrollbar::-webkit-scrollbar {
-      width: 10px !important;
-      --tw-bg-opacity: 1;
-      background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+      width: 4px !important;
+      background-color: transparent !important;
     }
     .on-scrollbar::-webkit-scrollbar-thumb {
       --tw-bg-opacity: 1;
       background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
-      border-radius: 4px;
     }
     .the-header {
       -webkit-backdrop-filter: blur(12px);
