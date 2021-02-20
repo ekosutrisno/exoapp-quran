@@ -24,7 +24,7 @@ const rukuk = {
       firestore
         .collection("rukuk_collections")
         .orderBy("number", "asc")
-        .limit(25)
+        .limit(40)
         .get()
 
         .then((menu) => {
@@ -57,7 +57,7 @@ const rukuk = {
         .collection("rukuk_collections")
         .orderBy("number", "asc")
         .endBefore(data.firstVisible)
-        .limitToLast(25);
+        .limitToLast(40);
 
       next.get().then((doc) => {
         var fisrtVisible = doc.docs[0];
@@ -78,11 +78,9 @@ const rukuk = {
     nextPage({ commit, dispatch }, data) {
       var next = firestore
         .collection("rukuk_collections")
-        .doc(data.surah_id)
-        .collection("ayahs")
-        .orderBy("aya_number", "asc")
+        .orderBy("number", "asc")
         .startAfter(data.lastVisible)
-        .limit(25);
+        .limit(40);
 
       next.get().then((doc) => {
         var fisrtVisible = doc.docs[0];

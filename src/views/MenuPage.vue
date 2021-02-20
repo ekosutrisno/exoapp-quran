@@ -39,7 +39,7 @@
                   <div class="font-semibold">Manzil</div>
                </div>
             </router-link>
-            <router-link to="/menu" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
+            <router-link to="/rukuk-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -75,23 +75,3 @@
 
    </div>
 </template>
-
-<script>
-import { computed, reactive, toRefs } from 'vue'
-import { useStore } from 'vuex'
-export default {
-   setup(){
-      const { state} = useStore();
-
-      const data = reactive({
-         rukuk: computed(()=> state.rukuk.rukuk),
-         firstRukukVisible: computed(()=> state.rukuk.firstRukukVisible),
-         lastRukukVisible: computed(()=> state.rukuk.lastRukukVisible),
-      })
-
-      return{
-         ...toRefs(data)
-      }
-   }
-}
-</script>

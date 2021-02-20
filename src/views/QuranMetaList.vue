@@ -42,26 +42,30 @@
        </div>
      </div>
   </section>
-  <div v-show="isOn" class="max-w-7xl mx-auto p-2 mb-4 sticky bottom-96 md:bottom-80 z-30 nv-transition">
-      <div class="w-full px-2 flex items-center justify-center">
+  <div v-show="isOn" class="max-w-7xl mx-auto p-2 mb-4 sticky bottom-24 md:bottom-80 z-30 nv-transition">
+      <div class="w-full max-w-lg mx-auto px-2 flex items-center justify-center relative">
          <input v-model="searchInput" ref="formSearch"  type="text" placeholder="Search surah..."  class="py-3 px-4 rounded w-full max-w-lg mt-6 focus:outline-none ring-2 ring-green-300 ring-opacity-75 focus:ring-opacity-60 shadow-2xl"/>
+         <div @click="onSearchInit" class="absolute top-10 right-5">
+            <svg class="w-4 md:cursor-pointer hover:text-gray-600 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+               <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+         </div>
       </div>
    </div>
-  <div class="sticky bottom-10 right-4 the-header float-right bg-gray-300 shadow-xl p-2 px-3 rounded-full">
+  <div class="sticky bottom-10 right-4 float-right bg-gray-50 shadow-xl p-2 px-3 rounded-full">
      <div class="inline-flex space-x-4">
-      <button @click="onSearchInit" class="p-2 rounded-full hover:bg-gray-200 focus:outline-none">
+      <button @click="onSearchInit" class="p-2 cursor-default md:cursor-pointer rounded-full hover:bg-gray-200 focus:outline-none">
          <svg class="w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
          </svg>
       </button>
-      <button @click="scrollToPageUp" class="p-2 rounded-full hover:bg-gray-200 focus:outline-none">
+      <button @click="scrollToPageUp" class="p-2 cursor-default md:cursor-pointer rounded-full hover:bg-gray-200 focus:outline-none">
          <svg class="w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 0zm0-6a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 5.414 5.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
          </svg>
       </button>
      </div>
   </div>
-    <p class="text-center text-sm text-gray-700">From ExoApp &copy;{{new Date().getFullYear()}} All right reserved</p> 
 </div>
 </template>
 <script>
@@ -107,6 +111,7 @@ export default {
 
       const onSearchInit = () =>{
          nextTick(() => {
+            state.searchInput = '';
             state.isOn = !state.isOn;
             setTimeout(() => {
                formSearch.value.focus();
