@@ -15,6 +15,7 @@ setup(){
         await store.dispatch('sajda/setSajda');
         await store.dispatch('juz/setJuz');
         await store.dispatch('manzil/setManzil');
+        await store.dispatch('rukuk/setRukuk');
     })
 }
 }
