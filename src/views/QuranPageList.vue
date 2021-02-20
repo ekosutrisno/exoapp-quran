@@ -4,7 +4,7 @@
    </div>
    <div class="bg-gray-200 min-h-screen w-full on-scrollbar h-screen nv-transition overflow-y-auto">
       <div ref="pageUp"></div>
-      <section class="w-full min-w-min  bg-gray-900 py-6 relative">
+      <section class="w-full min-w-min  bg-gray-900 py-6">
          <div class="max-w-7xl mx-auto p-4 relative">
             <button @click="back" class="absolute text-gray-300 transition focus:outline-none left-10 hover:text-gray-100">
                <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -29,7 +29,7 @@
                <h1 class="text-3xl md:text-4xl text-gray-100 font-quran"> {{surah.surat_name}} </h1>
                <p class="font-semibold text-yellow-300 md:text-lg text-center"> {{surah.surat_terjemahan}}</p>
             </div>
-            <div class="w-full mx-auto max-w-sm -mb-24 bg-white z-40 mt-4 rounded-lg h-16">
+            <div class="w-full mx-auto max-w-sm -mb-24 bg-white z-40 mt-4 rounded-lg h-16 sticky top-0">
                <div class="flex flex-col md:flex-row items-center justify-center text-xl md:text-3xl divide-y md:divide-y-0 md:divide-x h-full">
                   <div class="px-4 w-full text-center font-semibold text-green-600"> {{surah.count_ayat}}/<span class="font-serif leading-8">{{convertToArab(surah.count_ayat)}}</span> </div>
                   <div class="px-4 w-full text-center font-semibold text-cyan-600"> Ayat </div>

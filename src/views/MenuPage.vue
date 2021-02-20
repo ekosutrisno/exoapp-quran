@@ -1,7 +1,7 @@
 <template>
    <div class="h-screen flex items-center flex-col">
-      <div class="flex-none relative flex items-end flex-shrink-0 w-full max-w-screen-sm bg-gradient-to-b from-gray-900 to-gray-700 h-1/4">
-         <div class="absolute top-4 left-4 text-gray-200 text-xl">Qur'an</div>
+      <div class="flex-none relative flex items-end flex-shrink-0 w-full bg-gradient-to-b from-gray-900 to-gray-700 h-1/4">
+         <div class="absolute top-4 left-4 text-gray-200 text-xl">E-Qur'an</div>
          <div class="bg-gray-100 h-16 w-36 z-50 mx-auto p-4 absolute left-4 -bottom-10 rounded-lg">
             <div class="flex items-center justify-between">
                <div class="w-8 h-8 rounded p-1">
@@ -17,9 +17,9 @@
             <h1 class="font-semibold text-center text-sm sm:text-base">Account</h1>
          </div>
       </div>
-      <div class="flex-1 max-w-screen-sm w-full overflow-y-auto bg-gray-200 hero-background pt-10">
-         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 w-full p-4">
-            <router-link to="/metadata" class="h-full sm:h-40 sm:w-auto flex items-center justify-center bg-gray-100 bg-opacity-90 transition cursor-pointer hover:shadow-lg p-4 rounded-xl">
+      <div class="flex-1 w-full overflow-y-auto bg-gray-200 hero-background pt-10">
+         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 lg:gap-4 w-full p-4">
+            <router-link to="/surah-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col relative justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-pink-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -29,7 +29,7 @@
                   <div class="font-semibold">Surat</div>
                </div>
             </router-link>
-            <div class="h-full sm:h-40 sm:w-auto flex items-center justify-center bg-gray-100 bg-opacity-90 transition cursor-pointer hover:shadow-lg p-4 rounded-xl">
+            <router-link to="/manzil-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-purple-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -38,8 +38,8 @@
                   </div>
                   <div class="font-semibold">Manzil</div>
                </div>
-            </div>
-            <div class="h-full sm:h-40 sm:w-auto flex items-center justify-center bg-gray-100 bg-opacity-90 transition cursor-pointer hover:shadow-lg p-4 rounded-xl">
+            </router-link>
+            <router-link to="/menu" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -48,8 +48,8 @@
                   </div>
                   <div class="font-semibold">Rukuk</div>
                </div>
-            </div>
-            <div class="h-full sm:h-40 sm:w-auto flex items-center justify-center bg-gray-100 bg-opacity-90 transition cursor-pointer hover:shadow-lg p-4 rounded-xl">
+            </router-link>
+            <router-link to="/sajda-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -58,8 +58,8 @@
                   </div>
                   <div class="font-semibold">Sajda</div>
                </div>
-            </div>
-            <div class="h-full sm:h-40 sm:w-auto flex items-center justify-center bg-gray-100 bg-opacity-90 transition cursor-pointer hover:shadow-lg p-4 rounded-xl">
+            </router-link>
+            <router-link to="/juz-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -68,7 +68,7 @@
                   </div>
                   <div class="font-semibold">Juz</div>
                </div>
-            </div>
+            </router-link>
            
          </div>
       </div>
@@ -77,11 +77,21 @@
 </template>
 
 <script>
-   export default {
-      
+import { computed, reactive, toRefs } from 'vue'
+import { useStore } from 'vuex'
+export default {
+   setup(){
+      const { state} = useStore();
+
+      const data = reactive({
+         rukuk: computed(()=> state.rukuk.rukuk),
+         firstRukukVisible: computed(()=> state.rukuk.firstRukukVisible),
+         lastRukukVisible: computed(()=> state.rukuk.lastRukukVisible),
+      })
+
+      return{
+         ...toRefs(data)
+      }
    }
+}
 </script>
-
-<style scoped>
-
-</style>

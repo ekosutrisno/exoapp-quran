@@ -51,7 +51,7 @@ const surah = {
         .doc(surah_id)
         .collection("ayahs")
         .orderBy("aya_number", "asc")
-        .limit(10)
+        .limit(20)
         .get()
         .then((ayah) => {
           var fisrtVisible = ayah.docs[0];
@@ -102,7 +102,7 @@ const surah = {
         .collection("ayahs")
         .orderBy("aya_number", "asc")
         .endBefore(data.firstVisible)
-        .limitToLast(10);
+        .limitToLast(20);
 
       next.get().then((doc) => {
         var fisrtVisible = doc.docs[0];
@@ -127,7 +127,7 @@ const surah = {
         .collection("ayahs")
         .orderBy("aya_number", "asc")
         .startAfter(data.lastVisible)
-        .limit(10);
+        .limit(20);
 
       next.get().then((doc) => {
         var fisrtVisible = doc.docs[0];
