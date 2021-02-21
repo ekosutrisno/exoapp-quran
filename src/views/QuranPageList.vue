@@ -47,19 +47,23 @@
         <QuranAyatCard v-for="ayat in ayats" :key="ayat.aya_id" :ayat="ayat"/>
      </div>
      <div class="flex items-center my-4 justify-center">
-         <button @click="previousAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-l-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:ring-1 focus:ring-green-500 focus:outline-none"><span>
-            <svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-            </svg></span> <span>Ayat Sebelum</span> 
-         </button>
-        <button @click="nextAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-r-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:ring-1 focus:ring-green-500 focus:outline-none"><span>Ayat Sesudah</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <button @click="nextAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:ring-1 focus:ring-green-500 focus:outline-none"><span>Selanjutnya</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
          <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
          </svg></span> 
       </button>
      </div>
    </section>
     <p class="text-center text-sm py-5 text-gray-700">From ExoApp &copy;{{new Date().getFullYear()}} All right reserved</p> 
+   <div class="sticky bottom-10 right-4 float-right bg-gray-50 shadow-xl p-2 rounded-full">
+      <div class="inline-flex space-x-4">
+         <button @click="scrollToPageUp" class="p-2 cursor-default md:cursor-pointer rounded-full hover:bg-gray-200 focus:outline-none">
+         <svg class="w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 0zm0-6a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 5.414 5.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+         </svg>
+      </button>
+      </div>
    </div>
+</div>
 </template>
 
 <script>
@@ -107,24 +111,12 @@ export default {
          router.back();
       }
 
-      const previousAyat = async () =>{
-         var data = {
-            firstVisible: state.firstAyahVisible,
-            surah_id: route.query.surah_number
-         }
-         await store.dispatch('surah/prevPage', data);
-
-         scrollToPageUp();
-      }
-
       const nextAyat = async ()=>{
          var data = {
             lastVisible: state.lastAyahVisible,
             surah_id: route.query.surah_number
          }
          await store.dispatch('surah/nextPage', data);
-
-         scrollToPageUp();
       }
 
       const pageUp = ref(null)
@@ -138,7 +130,6 @@ export default {
          pageUp,
          scrollToPageUp,
          convertToArab,
-         previousAyat,
          nextAyat,
          back
       }
