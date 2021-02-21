@@ -1,5 +1,5 @@
 <template>
-<div class="w-full relative group nv-transition text-gray-800 hover:bg-gray-100 py-4 transition duration-300 max-w-screen-md mx-auto font-quran font-semibold text-right px-4 text-xl rounded-bl-3xl border-r-4 border-transparent cursor-pointer hover:border-gray-400 hover:shadow select-none">
+<div class="w-full relative group nv-transition text-gray-800 hover:bg-gray-100 py-4 transition duration-300 max-w-screen-lg mx-auto font-quran font-semibold text-right px-4 text-xl rounded-bl-3xl border-r-4 border-transparent sm:cursor-pointer hover:border-gray-400 hover:shadow select-none">
    <p> 
       <span class="group-hover:text-quran-brown-text leading-10">{{ayat.aya_text}}</span>   
       <span class="text-xl text-quran-brown-text font-mono"> -{{convertToArab(ayat.aya_number)}}</span> 
@@ -17,11 +17,13 @@
       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
    </svg>
 
-   <audio v-if="playAudio" class="focus:outline-none mb-4 sm:mb-0 float-right nv-transition mt-2 h-8 w-full max-w-xs" preload :src="ayat.audio" controls>
-     <source v-for="(aud, idx) in ayat.audio_secondary" :key="idx" :src="aud" type = "audio/mp3" />
-   </audio>
+   <div class="w-full bg-gray-600">
+      <audio v-if="playAudio" class="focus:outline-none mb-4 sm:mb-0 float-right nv-transition mt-2 h-8 w-full max-w-sm" preload :src="ayat.audio" controls>
+         <source v-for="(aud, idx) in ayat.audio_secondary" :key="idx" :src="aud" type = "audio/mp3" />
+      </audio>
+   </div>
    
-   <p class="text-xs font-normal mt-3 text-left"> 
+   <div class="text-xs w-full font-normal mt-3 text-left"> 
       <span class="font-medium">Info: (Rukuk: {{ayat.rukuk}})(Manzil: {{ayat.manzil}}) </span>
       <span v-if="ayat.sajda" class="font-semibold text-yellow-500">
       - Sajda 
@@ -29,7 +31,7 @@
          <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
       </svg>
       </span>
-   </p>
+   </div>
 
 </div>
 </template>
