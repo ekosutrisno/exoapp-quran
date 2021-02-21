@@ -1,6 +1,6 @@
 <template>
    <div class="h-screen flex items-center flex-col">
-      <div class="flex-none relative flex items-end flex-shrink-0 w-full bg-gradient-to-b from-gray-900 to-gray-700 h-1/4">
+      <div class="flex-none relative  flex items-end flex-shrink-0 w-full bg-gradient-to-b from-gray-900 to-gray-700 h-1/4">
          <div class="absolute top-4 left-4 text-gray-200 text-xl">E-Qur'an</div>
          <div class="bg-gray-100 h-16 w-36 z-50 mx-auto p-4 absolute left-4 -bottom-10 rounded-lg">
             <div class="flex items-center justify-between">
@@ -18,9 +18,9 @@
          </div>
       </div>
       <div class="flex-1 w-full overflow-y-auto bg-gray-200 hero-background pt-10">
-         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 lg:gap-4 w-full p-4">
+         <div class=" hidden grid-cols-2 sm:grid-cols-3 gap-2 lg:gap-4 w-full p-4">
             <router-link to="/surah-page" class="h-40 sm:w-auto max-w-xs flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
-               <div class="flex flex-col relative justify-center items-center">
+               <div class="relative justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-pink-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
@@ -71,7 +71,58 @@
             </router-link>
            
          </div>
+         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 lg:gap-4 w-full p-4">
+         <CardMenu v-for="menu in menus" :key="menu.menuId" :menu="menu"/>
+         </div>
       </div>
 
    </div>
 </template>
+<script>
+import CardMenu from '../components/CardMenu.vue'
+export default {
+  components: { CardMenu },
+  data(){
+     return{
+        menus:[
+           {
+              menuId: '6bfbaca3-8a42-4ff6-b1dc-9086730e8809',
+              menuTitle: 'Surat',
+              menuDesc:'Index Surat',
+              to:'/surah-page',
+              img:'https://i.pinimg.com/236x/2c/4b/8a/2c4b8a6c7faf31c881086374551f30aa.jpg'
+           },
+           {
+              menuId: '56c77d66-354f-446e-b132-c42ad69ba9ab',
+              menuTitle: 'Manzil',
+              menuDesc:'Index Manzil',
+              to:'/manzil-page',
+              img:'https://i.pinimg.com/236x/69/b0/06/69b006ec4c3a72708e68e66cababa905.jpg'
+           },
+           {
+              menuId: '9738964e-942b-4a71-8feb-61fa5e7d039d',
+              menuTitle: 'Rukuk',
+              menuDesc:'Index Rukuk',
+              to:'/rukuk-page',
+              img:'https://i.pinimg.com/236x/99/c7/c9/99c7c9b91e571023246299f7e1d31b9e.jpg'
+           },
+           {
+              menuId: 'b0b9e184-e26c-4a98-adb3-7b7be7343a6b',
+              menuTitle: 'Sajda',
+              menuDesc:'Index Sajda',
+              to:'/sajda-page',
+              img:'https://i.pinimg.com/236x/77/ba/06/77ba06ed50b5250f74fd3181af23ab39.jpg'
+           },
+           {
+              menuId: '0abd415e-78e8-4f74-a443-2f23d714823d',
+              menuTitle: 'Juz',
+              menuDesc:'Index Juz',
+              to:'/juz-page',
+              img:'https://i.pinimg.com/236x/49/3b/76/493b76b7ad42b3fbcfddd02907c75081.jpg'
+           },
+        ]
+     }
+  }
+   
+}
+</script>
