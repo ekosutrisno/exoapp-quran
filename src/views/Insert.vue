@@ -6,6 +6,7 @@
      <button @click="insertManzil" class="text-white m-2 py-2 px-6 bg-green-500">Manzil</button>
      <button @click="insertRukuk" class="text-white m-2 py-2 px-6 bg-green-500">Rukuk</button>
      <button @click="insertJuz" class="text-white m-2 py-2 px-6 bg-green-500">Juz</button>
+     <button @click="insertDataIndAyat" class="text-white m-2 py-2 px-6 bg-green-500">Update Ayat</button>
   </div>
 </template>
 
@@ -162,6 +163,42 @@ export default {
        });
     }
 
+    const insertDataIndAyat = () => {
+
+        state.quranFull.forEach( (quran) => {
+            const data = {
+               number: quran.number,
+               ayats: quran.ayahs
+            }
+
+            data.ayats.forEach(async ayat => {
+
+               let ayatData = {
+                  audio: ayat.audio,
+                  audio_secondary: ayat.audioSecondary,
+                  hizb_quarter: ayat.hizbQuarter,
+                  manzil: ayat.manzil,
+                  rukuk: ayat.ruku,
+                  sajda: ayat.sajda
+               }
+
+            await firestore
+                        .collection("surah_collections")
+                        .doc(data.number.toString())
+                        .collection('ayahs')
+                        .doc(ayat.numberInSurah.toString())
+                        .set(ayatData, {merge : true})
+                        .then(()=>{
+                           console.log("Ayat Updated");
+                     });
+            })
+            
+
+        })
+
+         
+    };
+
     return{
        ...toRefs(state),
        insertData,
@@ -169,7 +206,8 @@ export default {
        insertSajda,
        insertManzil,
        insertRukuk,
-       insertJuz
+       insertJuz,
+       insertDataIndAyat
     }
   },
 };

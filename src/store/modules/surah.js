@@ -21,6 +21,9 @@ const surah = {
     SET_AYAH_PAGINATE: (state, data) => (state.ayahsPagination = data),
     SET_AYAH_FIRSTV: (state, data) => (state.firstAyahVisible = data),
     SET_AYAH_LASTV: (state, data) => (state.lastAyahVisible = data),
+    SET_NEXT_AYAH: (state, data) => {
+      state.ayahs.push(...data);
+    },
   },
   actions: {
     async setSurahs({ commit }) {
@@ -95,31 +98,6 @@ const surah = {
           }
         });
     },
-    prevPage({ commit, dispatch }, data) {
-      var next = firestore
-        .collection("surah_collections")
-        .doc(data.surah_id)
-        .collection("ayahs")
-        .orderBy("aya_number", "asc")
-        .endBefore(data.firstVisible)
-        .limitToLast(20);
-
-      next.get().then((doc) => {
-        var fisrtVisible = doc.docs[0];
-        dispatch("setAyahFirstVisible", fisrtVisible);
-
-        var lastVisible = doc.docs[doc.docs.length - 1];
-        dispatch("setAyahLastVisible", lastVisible);
-
-        let tempData = [];
-
-        doc.forEach((ayat) => {
-          tempData.push(ayat.data());
-        });
-
-        commit("SET_AYAH", tempData);
-      });
-    },
     nextPage({ commit, dispatch }, data) {
       var next = firestore
         .collection("surah_collections")
@@ -142,7 +120,7 @@ const surah = {
           tempData.push(ayat.data());
         });
 
-        commit("SET_AYAH", tempData);
+        commit("SET_NEXT_AYAH", tempData);
       });
     },
   },

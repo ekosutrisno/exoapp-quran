@@ -19,7 +19,7 @@
       </div>
       <div class="flex-1 w-full overflow-y-auto bg-gray-200 hero-background pt-10">
          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 lg:gap-4 w-full p-4">
-            <router-link to="/surah-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
+            <router-link to="/surah-page" class="h-40 sm:w-auto max-w-xs flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col relative justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-pink-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -29,7 +29,7 @@
                   <div class="font-semibold">Surat</div>
                </div>
             </router-link>
-            <router-link to="/manzil-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
+            <router-link to="/manzil-page" class="h-40 sm:w-auto max-w-xs flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-purple-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -39,7 +39,7 @@
                   <div class="font-semibold">Manzil</div>
                </div>
             </router-link>
-            <router-link to="/rukuk-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
+            <router-link to="/rukuk-page" class="h-40 sm:w-auto max-w-xs flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -49,7 +49,7 @@
                   <div class="font-semibold">Rukuk</div>
                </div>
             </router-link>
-            <router-link to="/sajda-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
+            <router-link to="/sajda-page" class="h-40 sm:w-auto max-w-xs flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -59,7 +59,7 @@
                   <div class="font-semibold">Sajda</div>
                </div>
             </router-link>
-            <router-link to="/juz-page" class="h-40 sm:w-auto flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
+            <router-link to="/juz-page" class="h-40 sm:w-auto max-w-xs flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="flex flex-col justify-center items-center">
                   <div class="w-10 h-10 rounded p-1">
                      <svg class="text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
