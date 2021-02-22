@@ -4,12 +4,12 @@
       </div>
     <div class="w-full flex items-start py-2 justify-between">
       <div>
-        <span class="font-bold text-lg text-gray-800">
+        <span class="font-bold text-lg text-gray-900">
           {{ `${sajda.recommended ? 'Recommended' : 'Not Recommended'}`}}
         </span>
-      <p class="text-sm text-gray-500"><span class="font-semibold"> {{ `${sajda.obligatory ? 'Obligatory' : 'Not Obligatory'}`}}</span></p>
+      <p class="text-sm text-gray-600"><span class="font-semibold"> {{ `${sajda.obligatory ? 'Obligatory' : 'Not Obligatory'}`}}</span></p>
       </div>
-      <div class="text-gray-800 absolute -right-2 -top-2 w-12 h-12 rounded-full bg-gray-50 bg-opacity-50 flex items-center justify-center font-semibold">
+      <div class="text-gray-900 absolute -right-2 -top-2 w-12 h-12 rounded-full bg-gray-50 bg-opacity-50 flex items-center justify-center font-semibold">
          {{ sajda.number }}
       </div>
     </div>

@@ -9,11 +9,11 @@
         <span :class="[juz.number % 2 === 0 ? 'text-purple-500' : 'text-green-500']" class="font-bold text-xl">
           Juz
         </span></div>
-      <div class="text-gray-800 absolute -right-2 -top-2 w-12 h-12 rounded-full bg-gray-50 bg-opacity-50 flex items-center justify-center font-semibold">
+      <div class="text-gray-900 absolute -right-2 -top-2 w-12 h-12 rounded-full bg-gray-50 bg-opacity-50 flex items-center justify-center font-semibold">
          {{ juz.number }}
       </div>
     </div>
-    <h1 class="text-right text-3xl font-semibold text-gray-700 transition group-hover:text-gray-900"> <sup class="text-xs">Surat</sup> {{juz.surat}}<span class="text-sm">({{juz.ayat}})</span></h1>
+    <h1 class="text-right text-3xl font-semibold text-gray-900"> <sup class="text-xs">Surat</sup> {{juz.surat}}<span class="text-sm">({{juz.ayat}})</span></h1>
     <div class="inline-flex space-x-2 text-xs mt-2">
       <div :class="[ juz.number % 2 === 0 ? 'text-purple-500' : 'text-green-500' ]" class="inline-flex items-center space-x-1 font-semibold uppercase">
         <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
