@@ -60,10 +60,19 @@
      </div>
   </section>
     <p class="text-center text-sm py-5 text-gray-700">From ExoApp &copy;{{new Date().getFullYear()}} All right reserved</p> 
+   <div class="sticky bottom-10 right-4 float-right bg-gray-50 shadow-xl p-2 rounded-full">
+      <div class="inline-flex space-x-4">
+         <button @click="scrollToPageUp" class="p-2 cursor-default md:cursor-pointer rounded-full hover:bg-gray-200 focus:outline-none">
+         <svg class="w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 0zm0-6a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 5.414 5.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+         </svg>
+      </button>
+      </div>
+   </div>
 </div>
 </template>
 <script>
-import { computed, onMounted, reactive, ref, toRefs } from 'vue';
+import { computed, reactive, ref, toRefs } from 'vue';
 import { useStore } from 'vuex';
 import QuranRukukCard from '../components/QuranRukukCard.vue';
 import Spinner from '../components/Spinner.vue';
@@ -79,10 +88,6 @@ export default {
          rukuk: computed(()=> store.state.rukuk.rukuk),
          firstRukukVisible: computed(()=> store.state.rukuk.firstRukukVisible),
          lastRukukVisible: computed(()=> store.state.rukuk.lastRukukVisible),
-      })
-
-      onMounted(() =>{
-         store.dispatch('rukuk/setRukuk')
       })
 
       const searching = computed(()=> state.searchInput.trim() !== '');
@@ -106,7 +111,6 @@ export default {
             firstVisible: state.firstRukukVisible,
          }
          await store.dispatch('rukuk/prevPage', data);
-
          scrollToPageUp();
       }
 
@@ -115,13 +119,12 @@ export default {
             lastVisible: state.lastRukukVisible,
          }
          await store.dispatch('rukuk/nextPage', data);
-
          scrollToPageUp();
       }
 
       const pageUp = ref(null)
       const scrollToPageUp = () => {
-         pageUp.value.scrollIntoView();
+         pageUp.value.scrollIntoView({behavior: 'smooth'});
       }
       return{
          ...toRefs(state),
@@ -129,7 +132,8 @@ export default {
          onSearch,
          searching,
          previousRukuk,
-         nextRukuk
+         nextRukuk,
+         scrollToPageUp
          
       }
    }

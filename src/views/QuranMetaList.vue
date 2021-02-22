@@ -1,5 +1,5 @@
 <template>
-<div class="min-h-screen h-screen nv-transition">
+<div class="min-h-screen h-screen bg-gray-200 nv-transition">
    <div ref="pageUp"></div>
   <section class="w-full min-w-min bg-gray-900 py-6 relative">
       <div class="max-w-7xl mx-auto p-4 relative">
@@ -36,7 +36,7 @@
      <div v-else class="max-w-7xl mx-auto px-4 pb-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
          <QuranMetaCard v-for="surah in surahs" :key="surah.number" :surah="surah" data-aos="fade-up" data-aos-anchor-placement="top-bottom"/>
      </div>
-     <div v-if="onSearch.length = 0 " class="max-w-7xl text-center mx-auto px-4 pb-4">
+     <div v-if="onSearch.length == 0 " class="max-w-7xl text-center mx-auto px-4 pb-4">
        <div class="h-48 w-72 rounded-lg bg-gray-100 text-gray-800 mx-auto p-4">
            <h1 class="text-center font-semibold">Data Not Found</h1>
        </div>

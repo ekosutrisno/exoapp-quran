@@ -1,4 +1,6 @@
 <template>
+<router-link class="cursor-default sm:cursor-pointer" :to="{name: 'QuranAyatDetail', query:{ sn: juz.surat, an: juz.ayat}}">
+
    <div class="bg-white shadow-sm hover:shadow-xl relative overflow-hidden font-quran group transition sm:cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md select-none p-5">
      <div :class="[juz.number % 2 === 0  ? 'bg-purple-200': 'bg-green-200']" class="absolute -left-10 -top-5 w-20 h-20 rounded-r-full bg-opacity-10">
       </div>
@@ -22,6 +24,7 @@
     </div>
     </div>
   </div>
+</router-link>
 </template>
 <script>
 export default {

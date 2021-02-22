@@ -18,7 +18,7 @@
    </svg>
 
    <div class="w-full bg-gray-600">
-      <audio v-if="playAudio" class="focus:outline-none mb-4 sm:mb-0 float-right nv-transition mt-2 h-8 w-full max-w-sm" preload :src="ayat.audio" controls>
+      <audio v-if="playAudio" class="focus:outline-none mb-4 sm:mb-0 float-right nv-transition mt-2 h-8 w-full max-w-md" preload :src="ayat.audio" controls>
          <source v-for="(aud, idx) in ayat.audio_secondary" :key="idx" :src="aud" type = "audio/mp3" />
       </audio>
    </div>

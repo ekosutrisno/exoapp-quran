@@ -1,6 +1,7 @@
 <template>
-   <div class="bg-white select-none shadow-sm hover:shadow-xl font-quran group transition sm:cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5 overflow-hidden relative">
+<router-link class="cursor-default sm:cursor-pointer" :to="{name: 'QuranAyatDetail', query:{ sn: rukuk.surat, an: rukuk.ayat}}">
 
+   <div class="bg-white select-none shadow-sm hover:shadow-xl font-quran group transition sm:cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5 overflow-hidden relative">
     <div class="w-full flex items-start py-2 justify-between">
       <div>
         <span :class="[rukuk.number % 2 === 0 ? 'text-green-500' : 'text-indigo-500']" class="font-bold text-xl">
@@ -19,6 +20,7 @@
     </div>
     </div>
   </div>
+</router-link>  
 </template>
 <script>
 export default {

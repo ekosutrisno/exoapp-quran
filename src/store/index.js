@@ -4,6 +4,7 @@ import sajda from "./modules/sajda";
 import juz from "./modules/juz";
 import manzil from "./modules/manzil";
 import rukuk from "./modules/rukuk";
+import ayat from "./modules/ayat";
 
 export default createStore({
   state: {},
@@ -15,5 +16,6 @@ export default createStore({
     juz,
     manzil,
     rukuk,
+    ayat,
   },
 });
