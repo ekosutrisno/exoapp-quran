@@ -1,4 +1,6 @@
 <template>
+<router-link class="cursor-default sm:cursor-pointer" :to="{name: 'QuranAyatDetail', query:{ sn: sajda.surat, an: sajda.ayat}}">
+
    <div class="bg-white select-none shadow-sm relative overflow-hidden hover:shadow-xl font-quran group transition sm:cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5">
      <div :class="[sajda.recommended ? 'bg-pink-200': 'bg-green-200']" class="absolute -left-10 -top-5 w-64 h-64 rounded-r-full bg-opacity-25">
       </div>
@@ -22,6 +24,7 @@
     </div>
     </div>
   </div>
+</router-link>
 </template>
 <script>
 export default {

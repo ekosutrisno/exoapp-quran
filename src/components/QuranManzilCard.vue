@@ -1,4 +1,5 @@
 <template>
+<router-link class="cursor-default sm:cursor-pointer" :to="{name: 'QuranAyatDetail', query:{ sn: manzil.surat, an: manzil.ayat}}">
    <div class="bg-white shadow-sm relative overflow-hidden hover:shadow-xl font-quran group transition-shadow sm:cursor-pointer flex flex-col select-none max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5">
      <div class="absolute -left-10 -bottom-10 w-28 h-28 rounded-full bg-purple-200 bg-opacity-25">
     </div>
@@ -22,6 +23,7 @@
     </div>
     </div>
   </div>
+</router-link>
 </template>
 <script>
 export default {

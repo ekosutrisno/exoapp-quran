@@ -1,19 +1,13 @@
 <template>
 <router-link :to="menu.to">
-   <div class="transition-shadow duration-300 flex overflow-hidden flex-col lg:flex-row bg-white rounded-md shadow-sm hover:shadow-xl">
-      <div class="max-h-72 w-full lg:w-1/2 overflow-hidden">
-      <img class="w-full h-28 sm:h-full object-cover" :src="menu.img" />
+   <div class="transition-shadow duration-300 flex overflow-hidden flex-col bg-white rounded-md shadow-sm hover:shadow-xl">
+      <div class="max-h-72 w-full overflow-hidden">
+      <img class="w-full h-28 sm:h-full max-h-72 object-cover" :src="menu.img" />
       </div>
-      <div class="h-16 sm:h-full max-h-72 w-full lg:w-1/2 overflow-hidden py-2 px-3 md:p-5">
+      <div class="h-16 sm:h-full max-h-72 w-full overflow-hidden py-2 px-3 md:p-5">
          <span class="text-lg font-semibold text-gray-800">{{menu.menuTitle}}</span>
          <span class="text-xs block"> {{menu.menuDesc}} </span>
-         <p class="text-xs hidden sm:block sm:text-sm sm:mt-3">Mencari dan Membaca berdasarkan {{menu.menuTitle}} yang disajikan secara terurut.</p>
-         <div class="hidden sm:inline-flex mt-6">
-            <div class="mx-2">
-               <span class="hidden sm:block font-semibold text-sm mb-1">Bacaanku</span>
-               <span class="inline-flex text-gray-900 font-semibold text-sm tracking-wide">Al-Fatihah(5) </span>
-            </div>
-         </div>
+         <p class="text-xs hidden sm:block sm:text-sm sm:mt-3">Mencari berdasarkan {{menu.menuTitle}} yang disajikan secara terurut.</p>
       </div>
    </div>
 </router-link>

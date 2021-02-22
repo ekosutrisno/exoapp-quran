@@ -44,13 +44,7 @@
             <div class="font-quran text-center mb-2 text-xl font-semibold">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
             <p class="text-center text-sm text-gray-600">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
         </div>
-        <QuranAyatCard v-for="ayat in ayats" :key="ayat.aya_id" :ayat="ayat"/>
-     </div>
-     <div class="flex items-center my-4 justify-center">
-        <button @click="nextAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:ring-1 focus:ring-green-500 focus:outline-none"><span>Selanjutnya</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-         <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-         </svg></span> 
-      </button>
+        <QuranAyatCard  :ayat="ayats"/>
      </div>
    </section>
     <p class="text-center text-sm py-5 text-gray-700">From ExoApp &copy;{{new Date().getFullYear()}} All right reserved</p> 
@@ -81,9 +75,8 @@ export default {
 
       const state = reactive({
          isProcess: computed(()=> store.state.surah.isLoading),
-         surah: computed(()=> store.state.surah.surah),
-         ayats: computed(()=> store.state.surah.ayahs),
-         lastAyahVisible: computed(()=> store.state.surah.lastAyahVisible),
+         surah: computed(()=> store.state.ayat.surat_detail),
+         ayats: computed(()=> store.state.ayat.ayat_detail)
       })
 
       onMounted( async ()=>{ 
@@ -91,7 +84,11 @@ export default {
       })
 
       const getSurahDetail = async () =>{
-         await store.dispatch('surah/setSurah', route.query.surah_number);
+         var payload = {
+            surat:route.query.sn,
+            ayat: route.query.an
+         }
+         await store.dispatch('ayat/setSuratDetail', payload);
       }
 
       const convertToArab = (str) => {
@@ -110,14 +107,6 @@ export default {
          router.back();
       }
 
-      const nextAyat = async ()=>{
-         var data = {
-            lastVisible: state.lastAyahVisible,
-            surah_id: route.query.surah_number
-         }
-         await store.dispatch('surah/nextPage', data);
-      }
-
       const pageUp = ref(null)
       const scrollToPageUp = () => {
          pageUp.value.scrollIntoView({behavior: 'smooth'});
@@ -129,7 +118,6 @@ export default {
          pageUp,
          scrollToPageUp,
          convertToArab,
-         nextAyat,
          back
       }
    }
