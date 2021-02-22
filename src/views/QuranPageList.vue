@@ -37,7 +37,7 @@
             </div>
          </div>
    </section>
-   <section class="min-w-min pt-20 min-h-full">
+   <section class="min-w-min pt-20 pb-5 bg-gray-100 min-h-full">
      <div  class="max-w-7xl mx-auto px-4 pb-4 flex flex-col items-end space-y-2">
         <div class="mb-4 mx-auto">
             <div class="font-quran text-center mb-4 text-sm font-semibold"><span class="text-sm font-normal">({{surah.surat_golongan}})</span> | {{surah.surat_text_full}} </div>

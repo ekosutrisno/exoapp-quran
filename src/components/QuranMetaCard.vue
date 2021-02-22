@@ -1,6 +1,6 @@
 <template>
 <router-link class="cursor-default sm:cursor-pointer" :to="{path: '/quran-page', query:{surah_number: surah.id}}">
-   <div class="bg-gray-100 hover:shadow-xl select-none font-quran group shadow-sm transition sm:cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5 overflow-hidden">
+   <div class="bg-white hover:shadow-xl select-none font-quran group shadow-sm transition sm:cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5 overflow-hidden">
 
     <div class="w-full flex items-start py-2 justify-between relative">
       <div>
@@ -13,7 +13,7 @@
       <div class="text-gray-800 absolute -right-10 -top-8 w-24 h-24 rounded-full bg-gray-50 flex items-center justify-center font-semibold">
          {{ surah.id }}
       </div>
-      <div class="absolute -left-10 top-0 w-56 h-56 rounded-full bg-blue-200 bg-opacity-10">
+      <div class="absolute -left-10 top-0 w-56 h-56 rounded-full bg-blue-200 bg-opacity-25">
       </div>
     </div>
     <h1 class="text-right text-3xl font-semibold text-gray-700 transition group-hover:text-gray-900"> <span class="text-sm">( {{ surah.surat_text_full}})</span> {{surah.surat_text}} </h1>

@@ -1,5 +1,5 @@
 <template>
-   <div class="bg-gray-100 select-none shadow-sm hover:shadow-xl font-quran group transition sm:cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5 overflow-hidden relative">
+   <div class="bg-white select-none shadow-sm hover:shadow-xl font-quran group transition sm:cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5 overflow-hidden relative">
 
     <div class="w-full flex items-start py-2 justify-between">
       <div>

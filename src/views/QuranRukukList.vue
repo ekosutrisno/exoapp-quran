@@ -18,7 +18,7 @@
                <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Rukuk</h1>
                <p class="font-semibold text-gray-100 md:text-lg text-center">Read and Study Alqur'an anywhere.</p>
          </div>
-         <div class="w-full md:mx-auto max-w-3xl -mb-24 bg-gray-100 z-40 mt-4 rounded-lg h-16">
+         <div class="w-full md:mx-auto max-w-3xl -mb-24 bg-white z-40 mt-4 rounded-lg h-16">
                <div class="flex flex-col md:flex-row items-center justify-center text-xl md:text-3xl divide-y md:divide-y-0 md:divide-x h-full">
                   <div class="px-4 w-full text-center font-semibold text-green-600">ExoApp</div>
                   <div class="px-4 w-full text-center font-semibold text-cyan-600">Qur'an</div>
@@ -26,7 +26,7 @@
          </div>
       </div>
   </section>
-  <section class="min-w-min bg-gray-200 pt-10 pb-5">
+  <section class="min-w-min bg-gray-100 pt-10 pb-5">
      <div class="max-w-7xl mx-auto p-2 mb-4 sticky top-0 z-30">
          <div class="w-full px-2 flex items-center justify-center">
             <input v-model="searchInput"  type="text" placeholder="Rukuk number..."  class="py-3 px-4 rounded w-full max-w-lg mt-6 focus:outline-none ring-2 ring-green-300 ring-opacity-75 focus:ring-opacity-60"/>
