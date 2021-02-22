@@ -26,7 +26,7 @@
          </div>
       </div>
   </section>
-  <section class="min-w-min pt-20 bg-gray-200 hero-background">
+  <section class="min-w-min pt-20 bg-gray-200">
      <div v-if="isProcess" class="flex items-center justify-center nv-transition">
       <Spinner/>
       </div>
@@ -52,7 +52,7 @@
          </div>
       </div>
    </div>
-  <div class="sticky bottom-10 right-4 float-right bg-gray-50 shadow-xl p-2 px-3 rounded-full">
+  <div class="sticky bottom-10 right-4 float-right bg-gray-50 shadow-xl p-2 rounded-full">
      <div class="inline-flex space-x-4">
       <button @click="onSearchInit" class="p-2 cursor-default md:cursor-pointer rounded-full hover:bg-gray-200 focus:outline-none">
          <svg class="w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

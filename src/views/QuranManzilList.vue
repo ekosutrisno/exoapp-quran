@@ -25,7 +25,7 @@
          </div>
       </div>
   </section>
-  <section class="min-w-min bg-gray-200 pt-20 hero-background">
+  <section class="min-w-min bg-gray-200 pt-20">
      <div v-if="isProcess" class="flex items-center justify-center nv-transition">
       <Spinner/>
       </div>

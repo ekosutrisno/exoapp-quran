@@ -1,18 +1,19 @@
 <template>
-   <div class="bg-gray-100 bg-opacity-90 hover:shadow-lg font-quran group border-2 border-transparent hover:border-gray-400 hover:border-opacity-75 transition cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-lg p-5">
-
+   <div class="bg-gray-100 select-none shadow-sm relative overflow-hidden hover:shadow-xl font-quran group transition sm:cursor-pointer flex flex-col max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5">
+     <div :class="[sajda.recommended ? 'bg-pink-200': 'bg-green-200']" class="absolute -left-10 -top-5 w-64 h-64 rounded-r-full bg-opacity-20">
+      </div>
     <div class="w-full flex items-start py-2 justify-between">
       <div>
         <span class="font-bold text-lg text-gray-800">
           {{ `${sajda.recommended ? 'Recommended' : 'Not Recommended'}`}}
         </span>
-      <p class="text-sm text-gray-600"><span class="font-semibold"> {{ `${sajda.obligatory ? 'Obligatory' : 'Not Obligatory'}`}}</span></p>
+      <p class="text-sm text-gray-500"><span class="font-semibold"> {{ `${sajda.obligatory ? 'Obligatory' : 'Not Obligatory'}`}}</span></p>
       </div>
-      <div class="text-gray-900 w-10 h-10 rounded-full bg-gray-200 ring-1 ring-gray-300 ring-opacity-90 flex items-center justify-center font-semibold">
+      <div class="text-gray-800 absolute -right-2 -top-2 w-12 h-12 rounded-full bg-gray-50 bg-opacity-50 flex items-center justify-center font-semibold">
          {{ sajda.number }}
       </div>
     </div>
-    <h1 class="text-right text-3xl font-semibold text-gray-700 transition group-hover:text-gray-900">Surah {{sajda.surat}}  <span class="text-sm">Ayat ({{sajda.ayat}})</span></h1>
+    <h1 class="text-right text-3xl font-semibold text-gray-900">Surah {{sajda.surat}}  <span class="text-sm">Ayat ({{sajda.ayat}})</span></h1>
     <div class="inline-flex space-x-2 text-xs mt-2">
       <div :class="[ sajda.recommended ? 'text-pink-400' : 'text-green-400' ]" class="inline-flex items-center space-x-1 font-semibold uppercase">
         <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
