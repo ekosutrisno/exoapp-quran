@@ -13,7 +13,7 @@
         </span>
       </div>
     </div>
-    <h1 class="text-right text-4xl font-semibold text-gray-700 transition group-hover:text-gray-900">{{manzil.surat}}  <span class="text-sm">({{manzil.ayat}})</span></h1>
+    <h1 class="text-right text-4xl font-semibold text-gray-900">{{manzil.surat}}  <span class="text-sm">({{manzil.ayat}})</span></h1>
     <div class="inline-flex space-x-2 text-xs mt-2">
       <div class="inline-flex items-center space-x-1 text-blue-500 font-semibold uppercase">
         <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
