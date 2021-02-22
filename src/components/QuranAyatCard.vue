@@ -1,5 +1,5 @@
 <template>
-<div class="w-full relative group nv-transition text-gray-800 hover:bg-gray-100 py-4 transition duration-300 max-w-screen-lg mx-auto font-quran font-semibold text-right px-4 text-xl rounded-bl-xl border-r-4 border-transparent sm:cursor-pointer hover:border-gray-400 hover:shadow-sm select-none">
+<div class="w-full relative group nv-transition text-gray-800 hover:bg-white py-4 transition duration-300 max-w-screen-lg mx-auto font-quran font-semibold text-right px-4 text-xl rounded-bl-xl border-r-4 border-transparent sm:cursor-pointer hover:border-gray-400 hover:shadow-sm select-none">
    <p> 
       <span class="group-hover:text-quran-brown-text leading-10">{{ayat.aya_text}}</span>   
       <span class="text-xl text-quran-brown-text font-mono"> -{{convertToArab(ayat.aya_number)}}</span> 

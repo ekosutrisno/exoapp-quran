@@ -17,7 +17,7 @@
             <h1 class="font-semibold text-center text-sm sm:text-base">Account</h1>
          </div>
       </div>
-      <div class="flex-1 w-full overflow-y-auto bg-gray-200 pt-10">
+      <div class="flex-1 w-full overflow-y-auto bg-gray-100 pt-10">
          <div class=" hidden grid-cols-2 sm:grid-cols-3 gap-2 lg:gap-4 w-full p-4">
             <router-link to="/surah-page" class="h-40 sm:w-auto max-w-xs flex items-center justify-center bg-quran-gray-100 bg-opacity-90 transition cursor-pointer p-4 rounded">
                <div class="relative justify-center items-center">

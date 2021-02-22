@@ -8,6 +8,7 @@ module.exports = {
         gray: colors.blueGray,
         quran: {
           "gray-100": "#F7F7F7",
+          "gray-quran": "#F7FCFC",
           "brown-text": "#584810",
           "green-darkest": "#003C3C",
         },

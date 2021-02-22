@@ -1,10 +1,10 @@
 <template>
-   <div class="bg-gray-100 shadow-sm relative overflow-hidden hover:shadow-xl font-quran group transition-shadow sm:cursor-pointer flex flex-col select-none max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5">
-     <div class="absolute -left-10 -bottom-10 w-28 h-28 rounded-full bg-purple-200 bg-opacity-20">
+   <div class="bg-white shadow-sm relative overflow-hidden hover:shadow-xl font-quran group transition-shadow sm:cursor-pointer flex flex-col select-none max-h-48 w-full max-w-md h-full mx-auto mb-2 rounded-md p-5">
+     <div class="absolute -left-10 -bottom-10 w-28 h-28 rounded-full bg-purple-200 bg-opacity-25">
     </div>
-     <div class="absolute left-10 bottom-10 w-10 h-10 rounded-full bg-purple-200 bg-opacity-20">
+     <div class="absolute left-10 bottom-10 w-10 h-10 rounded-full bg-purple-200 bg-opacity-25">
     </div>
-     <div class="absolute -right-5 -top-5 w-14 h-14 rounded-full bg-purple-200 bg-opacity-10">
+     <div class="absolute -right-5 -top-5 w-14 h-14 rounded-full bg-purple-200 bg-opacity-20">
     </div>
     <div class="w-full flex items-start py-2 justify-between">
       <div>
