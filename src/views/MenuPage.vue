@@ -2,7 +2,7 @@
    <div class="h-screen flex items-center flex-col">
       <div class="flex-none relative  flex items-end flex-shrink-0 w-full bg-gray-900 shadow-lg h-1/4">
          <div class="absolute top-4 left-4 font-semibold text-gray-200 text-xl">E-Qur'an</div>
-         <div class="bg-gray-100 h-16 w-36 z-50 mx-auto p-4 shadow-sm absolute left-4 -bottom-10 rounded-lg">
+         <div class="bg-white h-16 w-36 z-50 mx-auto p-4 shadow-sm absolute left-4 -bottom-10 rounded-lg">
             <div class="flex items-center justify-between">
                <div class="w-8 h-8 rounded p-1">
                   <svg class="text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
