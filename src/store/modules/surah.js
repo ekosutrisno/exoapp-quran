@@ -21,9 +21,7 @@ const surah = {
     SET_AYAH_PAGINATE: (state, data) => (state.ayahsPagination = data),
     SET_AYAH_FIRSTV: (state, data) => (state.firstAyahVisible = data),
     SET_AYAH_LASTV: (state, data) => (state.lastAyahVisible = data),
-    SET_NEXT_AYAH: (state, data) => {
-      state.ayahs.push(...data);
-    },
+    SET_NEXT_AYAH: (state, data) => state.ayahs.push(...data),
   },
   actions: {
     async setSurahs({ commit }) {
