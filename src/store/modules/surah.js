@@ -5,6 +5,7 @@ const surah = {
   state: () => {
     return {
       isLoading: false,
+      isPush: false,
       surahs: [],
       surah: {},
       ayahs: [],
@@ -18,7 +19,7 @@ const surah = {
     SET_SURAHS: (state, data) => (state.surahs = data),
     SET_SURAH: (state, data) => (state.surah = data),
     SET_AYAH: (state, data) => (state.ayahs = data),
-    SET_AYAH_PAGINATE: (state, data) => (state.ayahsPagination = data),
+    SET_AYAH_IS_PUSH: (state, data) => (state.isPush = data),
     SET_AYAH_FIRSTV: (state, data) => (state.firstAyahVisible = data),
     SET_AYAH_LASTV: (state, data) => (state.lastAyahVisible = data),
     SET_NEXT_AYAH: (state, data) => state.ayahs.push(...data),
@@ -97,6 +98,8 @@ const surah = {
         });
     },
     nextPage({ commit, dispatch }, data) {
+      commit("SET_AYAH_IS_PUSH", true);
+
       var next = firestore
         .collection("surah_collections")
         .doc(data.surah_id)
@@ -119,6 +122,7 @@ const surah = {
         });
 
         commit("SET_NEXT_AYAH", tempData);
+        commit("SET_AYAH_IS_PUSH", false);
       });
     },
   },

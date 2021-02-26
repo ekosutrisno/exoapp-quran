@@ -4,7 +4,7 @@
    </div>
    <div class="bg-gray-200 min-h-screen w-full on-scrollbar h-screen nv-transition overflow-y-auto">
       <div ref="pageUp"></div>
-      <section class="w-full min-w-min  bg-gray-900 py-6">
+      <section class="w-full min-w-min bg-gray-900 py-6">
          <div class="max-w-7xl mx-auto p-4 relative">
             <button @click="back" class="absolute text-gray-300 transition focus:outline-none left-10 hover:text-gray-100">
                <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -37,25 +37,28 @@
             </div>
          </div>
    </section>
-   <section class="min-w-min pt-20 pb-5 bg-gray-200 min-h-full">
+   <section class="min-w-min pt-20 pb-5 bg-quran min-h-full">
      <div  class="max-w-7xl mx-auto px-4 pb-4 flex flex-col items-end space-y-2">
         <div class="mb-4 mx-auto">
             <div class="font-quran text-center mb-4 text-sm font-semibold"><span class="text-sm font-normal">({{surah.surat_golongan}})</span> | {{surah.surat_text_full}} </div>
             <div class="font-quran text-center mb-2 text-xl font-semibold">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
             <p class="text-center text-sm text-gray-600">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
         </div>
-         <div v-if="$route.query.sajda=== 'true'">
+         <div v-if="$route.query.sajda=== 'true'" class="mx-auto">
             <QuranAyatCard :ayat="ayat"/>
          </div>
-         <div v-else>
+         <div v-else class="mx-auto">
             <QuranAyatCard v-for="ayat in ayats" :key="ayat.aya_id"  :ayat="ayat"/>
+         </div>
+         <div v-if="isPush" class="mx-auto">
+            <Loader/>
          </div>
      </div>
      <div v-if="$route.query.sajda != 'true'" class="flex items-center my-4 justify-center">
-        <button @click="nextAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:ring-1 focus:ring-green-500 focus:outline-none"><span>Selanjutnya</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-         <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-         </svg></span> 
-      </button>
+        <button @click="nextAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:outline-none"><span>Selanjutnya</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg></span> 
+         </button>
      </div>
    </section>
     <p class="text-center text-sm py-5 text-gray-700">From ExoApp &copy;{{new Date().getFullYear()}} All right reserved</p> 
@@ -77,15 +80,17 @@ import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
 import QuranAyatCard from '../components/QuranAyatCard.vue';
 import Spinner from '../components/Spinner.vue';
+import Loader from '../components/Loader.vue';
 export default {
-  components: { QuranAyatCard, Spinner },
+  components: { QuranAyatCard, Spinner, Loader },
    setup(){
       const store = useStore();
       const route = useRoute();
       const router = useRouter();
 
       const state = reactive({
-         isProcess: computed(()=> store.state.surah.isLoading),
+         isProcess: computed(()=> store.state.filterAyat.isLoading),
+         isPush: computed(()=> store.state.filterAyat.isPush),
          surah: route.query.sajda === 'true' 
          ? computed(()=> store.state.ayat.surat_detail)
          : computed(()=> store.state.filterAyat.surat),

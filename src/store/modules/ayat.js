@@ -26,6 +26,8 @@ const ayat = {
           if (doc.exists) {
             const ayat_detail = doc.data();
             commit("SET_AYAT_DETAIL", ayat_detail);
+
+            commit("SET_IS_LOADING", false);
           }
         });
     },
@@ -43,7 +45,6 @@ const ayat = {
 
             commit("SET_SURAT_DETAIL", surat_detail);
             dispatch("setAyatDetail", payload);
-            commit("SET_IS_LOADING", false);
           }
         });
     },

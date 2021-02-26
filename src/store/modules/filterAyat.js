@@ -5,6 +5,7 @@ const ayatFilter = {
   state: () => {
     return {
       isLoading: false,
+      isPush: false,
       ayats: [],
       surat: {},
       last_ayat: {},
@@ -12,6 +13,7 @@ const ayatFilter = {
   },
   mutations: {
     SET_IS_LOADING: (state, loading) => (state.isLoading = loading),
+    SET_AYAH_IS_PUSH: (state, data) => (state.isPush = data),
     SET_AYAT: (state, data) => (state.ayats = data),
     SET_NEXT_AYAT: (state, data) => state.ayats.push(...data),
     SET_LAST_AYAT: (state, data) => (state.last_ayat = data),
@@ -19,8 +21,6 @@ const ayatFilter = {
   },
   actions: {
     setAyatDetail({ commit, dispatch }, payload) {
-      commit("SET_IS_LOADING", true);
-
       firestore
         .collection("ayah_collections")
         .where("sura_id", "==", parseInt(payload.surat))
@@ -66,11 +66,12 @@ const ayatFilter = {
 
             commit("SET_SURAT", surat_detail);
             dispatch("setAyatDetail", payload);
-            commit("SET_IS_LOADING", false);
           }
         });
     },
     nextAyat({ commit, dispatch, state }) {
+      commit("SET_AYAH_IS_PUSH", true);
+
       var next = firestore
         .collection("ayah_collections")
         .orderBy("aya_id", "asc")
@@ -88,6 +89,7 @@ const ayatFilter = {
         });
 
         commit("SET_NEXT_AYAT", tempData);
+        commit("SET_AYAH_IS_PUSH", false);
       });
     },
     setLastAyat({ commit }, payload) {
