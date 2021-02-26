@@ -1,5 +1,5 @@
 <template>
-<div class="min-h-screen h-screen bg-gray-200 nv-transition">
+<div class="min-h-screen bg-gray-200 nv-transition">
    <div ref="pageUp"></div>
   <section class="w-full min-w-min bg-gray-900 py-6 relative">
       <div class="max-w-7xl mx-auto p-4 relative">
@@ -26,7 +26,7 @@
          </div>
       </div>
   </section>
-  <section class="min-w-min pt-20 bg-gray-200">
+  <section class="min-w-min pt-20 bg-quran">
      <div v-if="isProcess" class="flex items-center justify-center nv-transition">
       <Spinner/>
       </div>

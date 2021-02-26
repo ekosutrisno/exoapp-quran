@@ -7,9 +7,12 @@ import store from "./store";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-AOS.init({ mirror: true });
+AOS.init({ mirror: true, once: true });
+
+import VueClickAway from "vue3-click-away";
 
 createApp(App)
   .use(store)
   .use(router)
+  .use(VueClickAway)
   .mount("#app");

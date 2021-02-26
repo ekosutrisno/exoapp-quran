@@ -35,6 +35,30 @@
   }
 }
 
+.bg-quran {
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 400px;
+  overflow: hidden;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.2) 70%,
+      rgba(255, 255, 255, 0.2)
+    ),
+    url(../public/bg4.png);
+}
+body {
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 400px;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.2) 70%,
+      rgba(255, 255, 255, 0.2)
+    ),
+    url(../public/bg4.png);
+}
+
 div * {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */

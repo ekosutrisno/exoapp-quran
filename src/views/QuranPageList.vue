@@ -37,7 +37,7 @@
             </div>
          </div>
    </section>
-   <section class="min-w-min pt-20 pb-5 bg-gray-200 min-h-full">
+   <section class="min-w-min pt-20 bg-quran pb-5 min-h-full">
      <div  class="max-w-7xl mx-auto px-4 pb-4 flex flex-col items-end space-y-2">
         <div class="mb-4 mx-auto">
             <div class="font-quran text-center mb-4 text-sm font-semibold"><span class="text-sm font-normal">({{surah.surat_golongan}})</span> | {{surah.surat_text_full}} </div>
@@ -45,6 +45,9 @@
             <p class="text-center text-sm text-gray-600">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
         </div>
         <QuranAyatCard v-for="ayat in ayats" :key="ayat.aya_id" :ayat="ayat"/>
+         <div v-if="isPush" class="mx-auto">
+            <Loader/>
+         </div>
      </div>
      <div class="flex items-center my-4 justify-center">
         <button @click="nextAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:ring-1 focus:ring-green-500 focus:outline-none"><span>Selanjutnya</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -72,8 +75,9 @@ import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
 import QuranAyatCard from '../components/QuranAyatCard.vue';
 import Spinner from '../components/Spinner.vue';
+import Loader from '../components/Loader.vue';
 export default {
-  components: { QuranAyatCard, Spinner },
+  components: { QuranAyatCard, Spinner, Loader },
    setup(){
       const store = useStore();
       const route = useRoute();
@@ -81,6 +85,7 @@ export default {
 
       const state = reactive({
          isProcess: computed(()=> store.state.surah.isLoading),
+         isPush:computed(()=> store.state.surah.isPush),
          surah: computed(()=> store.state.surah.surah),
          ayats: computed(()=> store.state.surah.ayahs),
          lastAyahVisible: computed(()=> store.state.surah.lastAyahVisible),

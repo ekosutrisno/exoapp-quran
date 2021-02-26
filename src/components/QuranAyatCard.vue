@@ -17,8 +17,8 @@
       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
    </svg>
 
-   <div class="w-full bg-gray-600">
-      <audio v-if="playAudio" class="focus:outline-none mb-4 sm:mb-0 float-right nv-transition mt-2 h-8 w-full max-w-md" preload :src="ayat.audio" controls>
+   <div class="w-full">
+      <audio v-if="playAudio" class="focus:outline-none mb-4 sm:mr-4 sm:mb-0 float-right nv-transition mt-2 h-8 w-full max-w-md" preload :src="ayat.audio" controls>
          <source v-for="(aud, idx) in ayat.audio_secondary" :key="idx" :src="aud" type = "audio/mp3" />
       </audio>
    </div>
@@ -33,6 +33,22 @@
       </span>
    </div>
 
+   <!-- Menu Options -->
+   <div class="absolute right-0 bottom-0 p-2">
+      <div @click="hideMenuOption" class="relative">
+         <svg class="sm:cursor-pointer w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+         </svg>
+         <div v-click-away="hideMenuOption" v-if="option" class="w-32 absolute z-50 shadow-xl h-auto left-0 bottom-0 -ml-28 mt-6 py-1 bg-gray-50 rounded flex flex-col overflow-hidden">
+               <button type="button" class="w-full text-xs group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
+                  <span>Tandai bacaan</span>
+               </button>
+               <button type="button" class="w-full text-xs group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
+                  <span>Ayat favorit</span>
+               </button>
+            </div>
+      </div>
+   </div>
 </div>
 </template>
 
@@ -46,7 +62,8 @@ export default {
    },
    setup(){
          const data = reactive({
-            playAudio: false
+            playAudio: false,
+            option: false
          });
 
         const convertToArab = (str) => {
@@ -64,10 +81,15 @@ export default {
          data.playAudio = !data.playAudio;
       }
 
+       const hideMenuOption = () => {
+            data.option = !data.option
+         }
+
       return{
          ...toRefs(data),
          convertToArab,
-         togglePlay
+         togglePlay,
+         hideMenuOption
       }
    }
 }
