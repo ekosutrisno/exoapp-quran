@@ -7,7 +7,7 @@ import store from "./store";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-AOS.init({ mirror: true, once: true });
+AOS.init({ mirror: true, once: false });
 
 import VueClickAway from "vue3-click-away";
 

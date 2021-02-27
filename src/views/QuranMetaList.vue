@@ -15,8 +15,8 @@
                   </div>
                   <img class="object-cover" src="https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" alt="my-avatar">
                </div>
-               <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Surah</h1>
-               <p class="font-semibold text-gray-100 md:text-lg text-center">Read and Study Alqur'an anywhere.</p>
+               <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Surat</h1>
+               <p class="font-semibold text-gray-100 md:text-lg text-center">Terdapat Total <span class="font-semibold text-indigo-400">114</span> Surat</p>
          </div>
          <div class="w-full md:mx-auto max-w-3xl -mb-24 bg-white z-40 mt-4 rounded-lg h-16">
                <div class="flex flex-col md:flex-row items-center justify-center text-xl md:text-3xl divide-y md:divide-y-0 md:divide-x h-full">

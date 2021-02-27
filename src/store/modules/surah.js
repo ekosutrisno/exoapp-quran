@@ -9,18 +9,15 @@ const surah = {
       surahs: [],
       surah: {},
       ayahs: [],
-      ayahsPagination: [],
-      firstAyahVisible: {},
       lastAyahVisible: {},
     };
   },
   mutations: {
     SET_IS_LOADING: (state, loading) => (state.isLoading = loading),
+    SET_AYAH_IS_PUSH: (state, data) => (state.isPush = data),
     SET_SURAHS: (state, data) => (state.surahs = data),
     SET_SURAH: (state, data) => (state.surah = data),
     SET_AYAH: (state, data) => (state.ayahs = data),
-    SET_AYAH_IS_PUSH: (state, data) => (state.isPush = data),
-    SET_AYAH_FIRSTV: (state, data) => (state.firstAyahVisible = data),
     SET_AYAH_LASTV: (state, data) => (state.lastAyahVisible = data),
     SET_NEXT_AYAH: (state, data) => state.ayahs.push(...data),
   },
@@ -56,9 +53,6 @@ const surah = {
         .limit(20)
         .get()
         .then((ayah) => {
-          var fisrtVisible = ayah.docs[0];
-          dispatch("setAyahFirstVisible", fisrtVisible);
-
           var lastVisible = ayah.docs[ayah.docs.length - 1];
           dispatch("setAyahLastVisible", lastVisible);
 
@@ -73,9 +67,6 @@ const surah = {
         });
     },
 
-    setAyahFirstVisible({ commit }, firstVisible) {
-      commit("SET_AYAH_FIRSTV", firstVisible);
-    },
     setAyahLastVisible({ commit }, lastVisible) {
       commit("SET_AYAH_LASTV", lastVisible);
     },
@@ -109,9 +100,6 @@ const surah = {
         .limit(20);
 
       next.get().then((doc) => {
-        var fisrtVisible = doc.docs[0];
-        dispatch("setAyahFirstVisible", fisrtVisible);
-
         var lastVisible = doc.docs[doc.docs.length - 1];
         dispatch("setAyahLastVisible", lastVisible);
 
