@@ -27,11 +27,11 @@
           <div class="flex items-end space-x-2">
              <div class="ml-0">
                 <span class="block">Surat ke:</span>
-               <input v-model="sNumber" type="number" min="1" max="114" class="rounded-md py-2 px-3 w-20 bg-transparent ring-1 ring-gray-300 focus:outline-none focus-within:bg-gray-100" placeholder="1">
+               <input v-model="sNumber" type="number" min="1" max="114" class="rounded-md py-2 px-3 w-20 bg-transparent bg-gray-100 ring-1 ring-gray-300 focus:outline-none focus:bg-gray-100" placeholder="1">
              </div>
             <div class="ml-0">
                 <span class="block">Ayat ke:</span>
-               <input v-model="aNumber" type="number" min="1" class="rounded-md py-2 px-3 w-24 bg-transparent ring-1 ring-gray-300 focus:outline-none focus-within:bg-gray-100" placeholder="1">
+               <input v-model="aNumber" type="number" min="1" class="rounded-md py-2 px-3 w-24 bg-transparent bg-gray-100 ring-1 ring-gray-300 focus:outline-none focus:bg-gray-100" placeholder="1">
             </div>
             <div>
                <button @click="doSearch" class="py-2 px-3 inline-flex items-center justify-center space-x-2 transition rounded-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:outline-none">
@@ -39,6 +39,9 @@
                </button>
             </div>
           </div>
+         </div>
+         <div class="grid grid-cols-2 gap-2 lg:gap-4 w-full p-4">
+            <CardMenuSimple v-for="sMenu in simpleMenus" :key="sMenu.menuId" :simpleMenu="sMenu"/>
          </div>
          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4">
             <CardMenu v-for="menu in menus" :key="menu.menuId" :menu="menu"/>
@@ -48,8 +51,9 @@
 </template>
 <script>
 import CardMenu from '../components/CardMenu.vue'
+import CardMenuSimple from '../components/CardMenuSimple.vue'
 export default {
-  components: { CardMenu },
+  components: { CardMenu, CardMenuSimple },
   data(){
      return{
         onSearch: false,
@@ -58,39 +62,64 @@ export default {
         menus:[
            {
               menuId: '6bfbaca3-8a42-4ff6-b1dc-9086730e8809',
+              count: 114,
               menuTitle: 'Surat',
-              menuDesc:'Index Surat',
+              menuDesc:'Index',
               to:'/surah-page',
-              img:'https://i.pinimg.com/236x/2c/4b/8a/2c4b8a6c7faf31c881086374551f30aa.jpg'
+              img:'https://i.pinimg.com/236x/3d/8a/2e/3d8a2e283d123934f384b489a122f982.jpg'
+           },
+           {
+              menuId: '0f052c8e-d6ce-4509-aa9f-fd230a5ed711',
+              count: 604,
+              menuTitle: 'Page',
+              menuDesc:'Index',
+              to:'/page-page',
+              img:'https://i.pinimg.com/236x/eb/bf/89/ebbf894671364c3a3e773309dcfaaade.jpg'
            },
            {
               menuId: '56c77d66-354f-446e-b132-c42ad69ba9ab',
+              count: 7,
               menuTitle: 'Manzil',
-              menuDesc:'Index Manzil',
+              menuDesc:'Index',
               to:'/manzil-page',
-              img:'https://i.pinimg.com/236x/69/b0/06/69b006ec4c3a72708e68e66cababa905.jpg'
+              img:'https://i.pinimg.com/236x/36/3f/3d/363f3d5dce1474d816a85a0c1ad64fb3.jpg'
            },
            {
               menuId: '9738964e-942b-4a71-8feb-61fa5e7d039d',
+              count: 556,
               menuTitle: 'Rukuk',
-              menuDesc:'Index Rukuk',
+              menuDesc:'Index',
               to:'/rukuk-page',
-              img:'https://i.pinimg.com/236x/2d/d3/b0/2dd3b076ff540be24e6ee5dd5a58b558.jpg'
+              img:'https://i.pinimg.com/236x/e3/5f/50/e35f50ec52a39fa5465d12babc2c031a.jpg'
            },
            {
               menuId: 'b0b9e184-e26c-4a98-adb3-7b7be7343a6b',
+              count: 15,
               menuTitle: 'Sajda',
-              menuDesc:'Index Sajda',
+              menuDesc:'Index',
               to:'/sajda-page',
-              img:'https://i.pinimg.com/236x/77/ba/06/77ba06ed50b5250f74fd3181af23ab39.jpg'
+              img:'https://i.pinimg.com/236x/68/fc/70/68fc70bae855d088782b4848fb69d879.jpg'
            },
            {
               menuId: '0abd415e-78e8-4f74-a443-2f23d714823d',
+              count: 30,
               menuTitle: 'Juz',
-              menuDesc:'Index Juz',
+              menuDesc:'Index',
               to:'/juz-page',
-              img:'https://i.pinimg.com/236x/49/3b/76/493b76b7ad42b3fbcfddd02907c75081.jpg'
+              img:'https://i.pinimg.com/236x/1c/5f/54/1c5f543ac90d4f029d8e6e994fb458f4.jpg'
            },
+        ],
+        simpleMenus:[
+           {
+              menuId:'3abc0315-d282-4b55-9977-df55d45e7e07',
+              img:'https://i.pinimg.com/236x/1b/6e/8a/1b6e8a36d12bf9f965d3875fd08f4022.jpg',
+              title: 'Bacaanku'
+           },
+           {
+              menuId:'59d11aa8-a869-4db9-88ab-541fa4515ca8',
+              img:'https://i.pinimg.com/236x/27/37/a2/2737a226a2a77ab13aa9db1ec41e72d0.jpg',
+              title: 'Favorit'
+           }
         ]
      }
   },

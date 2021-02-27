@@ -49,7 +49,7 @@
             <Loader/>
          </div>
      </div>
-     <div class="flex items-center my-4 justify-center">
+     <div v-if="!isLast" class="flex items-center my-4 justify-center">
         <button @click="nextAyat" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:ring-1 focus:ring-green-500 focus:outline-none"><span>Selanjutnya</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
          <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
          </svg></span> 
@@ -95,6 +95,13 @@ export default {
         await getSurahDetail();
       })
 
+      const isLast = computed(()=>{
+         const ayatsSize = computed(()=> state.ayats.length);
+
+         return ayatsSize.value === state.surah.count_ayat ? true : false;
+      })
+
+
       const getSurahDetail = async () =>{
          await store.dispatch('surah/setSurah', route.query.surah_number);
       }
@@ -132,6 +139,7 @@ export default {
       return{
          ...toRefs(state),
          pageUp,
+         isLast,
          scrollToPageUp,
          convertToArab,
          nextAyat,

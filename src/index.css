@@ -39,7 +39,6 @@
   background-position: center;
   background-repeat: repeat;
   background-size: 400px;
-  overflow: hidden;
   background-image: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0.2) 70%,

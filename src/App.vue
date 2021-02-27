@@ -16,6 +16,7 @@ setup(){
         await store.dispatch('juz/setJuz');
         await store.dispatch('manzil/setManzil');
         await store.dispatch('rukuk/setRukuk');
+        await store.dispatch('page/setPage');
     })
 }
 }

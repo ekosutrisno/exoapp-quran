@@ -24,7 +24,7 @@
    </div>
    
    <div class="text-xs w-full font-normal mt-3 text-left"> 
-      <span class="font-medium">Info: (Rukuk: {{ayat.rukuk}})(Manzil: {{ayat.manzil}}) </span>
+      <span class="font-medium">Info: (Hal: {{ayat.page_number}})(Manzil: {{ayat.manzil}})(Rukuk: {{ayat.rukuk}}) </span>
       <span v-if="ayat.sajda" class="font-semibold text-yellow-500">
       - Sajda 
       <svg class="w-4 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -36,9 +36,10 @@
    <!-- Menu Options -->
    <div class="absolute right-0 bottom-0 p-2">
       <div @click="hideMenuOption" class="relative">
-         <svg class="sm:cursor-pointer w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+         <svg class="sm:cursor-pointer w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
          </svg>
+         
          <div v-click-away="hideMenuOption" v-if="option" class="w-32 absolute z-50 shadow-xl h-auto left-0 bottom-0 -ml-28 mt-6 py-1 bg-gray-50 rounded flex flex-col overflow-hidden">
                <button type="button" class="w-full text-xs group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
                   <span>Tandai bacaan</span>

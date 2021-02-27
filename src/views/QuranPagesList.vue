@@ -15,8 +15,8 @@
                   </div>
                   <img class="object-cover" src="https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" alt="my-avatar">
                </div>
-               <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Rukuk</h1>
-               <p class="font-semibold text-gray-100 md:text-lg text-center">Terdapat Total <span class="font-semibold text-indigo-400">556</span> Rukuk</p>
+               <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Page</h1>
+               <p class="font-semibold text-gray-100 md:text-lg text-center">Terdapat Total <span class="font-semibold text-indigo-400">604</span> Halaman</p>
          </div>
          <div class="w-full md:mx-auto max-w-3xl -mb-24 bg-white z-40 mt-4 rounded-lg h-16">
                <div class="flex flex-col md:flex-row items-center justify-center text-xl md:text-3xl divide-y md:divide-y-0 md:divide-x h-full">
@@ -29,17 +29,17 @@
   <section class="min-w-min bg-quran pt-10 pb-5">
      <div class="max-w-7xl mx-auto p-2 mb-4 sticky top-0 z-30">
          <div class="w-full px-2 flex items-center justify-center">
-            <input v-model="searchInput"  type="text" placeholder="Rukuk number..."  class="py-3 px-4 rounded w-full max-w-lg mt-6 focus:outline-none ring-2 ring-green-300 ring-opacity-75 focus:ring-opacity-60"/>
+            <input v-model="searchInput"  type="text" placeholder="Halaman..."  class="py-3 px-4 rounded w-full max-w-lg mt-6 focus:outline-none ring-2 ring-green-300 ring-opacity-75 focus:ring-opacity-60"/>
          </div>
      </div>
      <div v-if="isProcess" class="flex items-center justify-center nv-transition">
       <Spinner/>
       </div>
      <div v-if="searching" class="max-w-7xl mx-auto px-4 pb-4 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 gap-2">
-         <QuranRukukCard v-for="surah in onSearch" :key="surah.number" :rukuk="surah" data-aos="fade-up" data-aos-anchor-placement="top-bottom"/>
+         <QuranPageCard v-for="page in onSearch" :key="page.number" :page="page" data-aos="fade-up" data-aos-anchor-placement="top-bottom"/>
      </div>
      <div v-else class="max-w-7xl mx-auto px-4 pb-4 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 gap-2">
-         <QuranRukukCard v-for="surah in rukuk" :key="surah.number" :rukuk="surah" data-aos="fade-up" data-aos-anchor-placement="top-bottom"/>
+         <QuranPageCard v-for="page in pages" :key="page.number" :page="page" data-aos="fade-up" data-aos-anchor-placement="top-bottom"/>
      </div>
      <div v-if="isPush" class="max-w-7xl text-center mx-auto">
         <Loader/>
@@ -51,7 +51,7 @@
      </div>
 
      <div v-if="!isLast" class="flex items-center justify-center">
-        <button @click="nextRukuk" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-md bg-green-500 hover:bg-green-600 text-gray-100 focus:outline-none"><span>Next</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <button @click="nextPage" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-md bg-green-500 hover:bg-green-600 text-gray-100 focus:outline-none"><span>Next</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
          <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
          </svg></span> 
       </button>
@@ -72,46 +72,50 @@
 <script>
 import { computed, reactive, ref, toRefs } from 'vue';
 import { useStore } from 'vuex';
-import QuranRukukCard from '../components/QuranRukukCard.vue';
+import QuranPageCard from '../components/QuranPageCard.vue';
 import Spinner from '../components/Spinner.vue';
 import Loader from '../components/Loader.vue';
 export default {
-  components: { QuranRukukCard, Spinner, Loader },
+  components: { QuranPageCard, Spinner, Loader },
    setup(){
 
       const store = useStore();
 
       const state = reactive({
-         isProcess: computed(()=> store.state.rukuk.isLoading),
-         isPush: computed(()=> store.state.rukuk.isPush),
-         isLast: computed(()=> store.state.rukuk.isLast),
+         isProcess: computed(()=> store.state.page.isLoading),
+         isPush: computed(()=> store.state.page.isPush),
+         isLast: computed(()=> store.state.page.isLast),
          searchInput: '',
-         rukuk: computed(()=> store.state.rukuk.rukuk),
-         firstRukukVisible: computed(()=> store.state.rukuk.firstRukukVisible),
-         lastRukukVisible: computed(()=> store.state.rukuk.lastRukukVisible),
+         pages: computed(()=> store.state.page.pages),
+         lastPageVisible: computed(()=> store.state.page.lastPageVisible),
       })
 
       const searching = computed(()=> state.searchInput.trim() !== '');
 
       const onSearch = computed(()=>{
-         var searchData = state.rukuk.filter(post => {
-            return post.number.toString()
+         var query = parseInt(state.searchInput.toLowerCase());
+         
+         if(query > 604)
+            query = 604;
+         else if(query <= 0)
+            query = 1
+         
+         var searchData = state.pages.filter(post => {
+            return post.page.toString()
             .toLowerCase()
             .replace(/[-']+/g,'')
-            .includes(
-               state.searchInput.toLowerCase()
-            )
+            .includes(query.toString())
          });
          
          return searchData;
       
       })
 
-      const nextRukuk = async ()=>{
+      const nextPage = async ()=>{
          var data = {
-            lastVisible: state.lastRukukVisible,
+            lastVisible: state.lastPageVisible,
          }
-         await store.dispatch('rukuk/nextPage', data);
+         await store.dispatch('page/nextPage', data);
       }
 
       const pageUp = ref(null)
@@ -123,7 +127,7 @@ export default {
          pageUp,
          onSearch,
          searching,
-         nextRukuk,
+         nextPage,
          scrollToPageUp
          
       }

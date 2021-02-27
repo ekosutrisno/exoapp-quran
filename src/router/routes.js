@@ -7,6 +7,7 @@ import QuranManzilList from "../views/QuranManzilList.vue";
 import QuranSajdaList from "../views/QuranSajdaList.vue";
 import QuranRukukList from "../views/QuranRukukList.vue";
 import QuranAyatDetail from "../views/QuranAyatDetail.vue";
+import QuranPagesList from "../views/QuranPagesList.vue";
 const routes = [
   {
     path: "/",
@@ -22,6 +23,11 @@ const routes = [
     path: "/surah-page",
     name: "SurahPage",
     component: QuranMetaList,
+  },
+  {
+    path: "/page-page",
+    name: "PagePage",
+    component: QuranPagesList,
   },
   {
     path: "/quran-page",
