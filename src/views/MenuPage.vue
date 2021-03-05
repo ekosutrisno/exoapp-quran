@@ -40,10 +40,16 @@
             </div>
           </div>
          </div>
-         <div class="grid grid-cols-2 gap-2 lg:gap-4 w-full p-4">
+         <div class="ml-4 mt-2 -mb-2 text-xs font-semibold text-gray-600">
+            <h1>Personal</h1>
+         </div>
+         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 lg:gap-4 w-full p-4">
             <CardMenuSimple v-for="sMenu in simpleMenus" :key="sMenu.menuId" :simpleMenu="sMenu"/>
          </div>
-         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4">
+         <div class="ml-4 -mb-2 text-xs font-semibold text-gray-600">
+            <h1>Menu Index</h1>
+         </div>
+         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-4 w-full p-4">
             <CardMenu v-for="menu in menus" :key="menu.menuId" :menu="menu"/>
          </div>
       </div>
@@ -66,7 +72,7 @@ export default {
               menuTitle: 'Surat',
               menuDesc:'Index',
               to:'/surah-page',
-              img:'https://i.pinimg.com/236x/3d/8a/2e/3d8a2e283d123934f384b489a122f982.jpg'
+              img:'https://i.pinimg.com/236x/e9/78/b4/e978b4bf0f3950683bf0001f8faabeac.jpg'
            },
            {
               menuId: '0f052c8e-d6ce-4509-aa9f-fd230a5ed711',
@@ -74,7 +80,7 @@ export default {
               menuTitle: 'Page',
               menuDesc:'Index',
               to:'/page-page',
-              img:'https://i.pinimg.com/236x/eb/bf/89/ebbf894671364c3a3e773309dcfaaade.jpg'
+              img:'https://i.pinimg.com/236x/ac/7f/d1/ac7fd15615d761f8d1c4425ecad8b1d2.jpg'
            },
            {
               menuId: '56c77d66-354f-446e-b132-c42ad69ba9ab',
@@ -82,7 +88,7 @@ export default {
               menuTitle: 'Manzil',
               menuDesc:'Index',
               to:'/manzil-page',
-              img:'https://i.pinimg.com/236x/36/3f/3d/363f3d5dce1474d816a85a0c1ad64fb3.jpg'
+              img:'https://i.pinimg.com/236x/4f/b3/8d/4fb38d6d60638e2de1358f6954246a5e.jpg'
            },
            {
               menuId: '9738964e-942b-4a71-8feb-61fa5e7d039d',
@@ -98,7 +104,7 @@ export default {
               menuTitle: 'Sajda',
               menuDesc:'Index',
               to:'/sajda-page',
-              img:'https://i.pinimg.com/236x/68/fc/70/68fc70bae855d088782b4848fb69d879.jpg'
+              img:'https://i.pinimg.com/236x/b7/3c/2c/b73c2cb3e6915eeaf025891539b042ee.jpg'
            },
            {
               menuId: '0abd415e-78e8-4f74-a443-2f23d714823d',
@@ -113,12 +119,20 @@ export default {
            {
               menuId:'3abc0315-d282-4b55-9977-df55d45e7e07',
               img:'https://i.pinimg.com/236x/1b/6e/8a/1b6e8a36d12bf9f965d3875fd08f4022.jpg',
-              title: 'Bacaanku'
+              title: 'Bacaanku',
+              desc:'Menandai bacaan terakhir'
            },
            {
               menuId:'59d11aa8-a869-4db9-88ab-541fa4515ca8',
-              img:'https://i.pinimg.com/236x/27/37/a2/2737a226a2a77ab13aa9db1ec41e72d0.jpg',
-              title: 'Favorit'
+              img:'https://i.pinimg.com/236x/ac/7f/d1/ac7fd15615d761f8d1c4425ecad8b1d2.jpg',
+              title: 'Favorit',
+              desc:'Koleksi ayat-ayat favorit'
+           },
+           {
+              menuId:'7bc03ac7-3368-4f72-b84b-69edfeff1e4f',
+              img:'https://i.pinimg.com/236x/d8/b6/87/d8b687118ccba1b24039a1a426fd9955.jpg',
+              title: 'Tajwid',
+              desc:'Belajar tajwid'
            }
         ]
      }
