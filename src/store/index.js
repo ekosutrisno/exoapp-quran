@@ -7,11 +7,9 @@ import rukuk from "./modules/rukuk";
 import ayat from "./modules/ayat";
 import page from "./modules/page";
 import filterAyat from "./modules/filterAyat";
+import account from "./modules/account";
 
 export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
   modules: {
     surah,
     sajda,
@@ -21,5 +19,6 @@ export default createStore({
     page,
     ayat,
     filterAyat,
+    account,
   },
 });

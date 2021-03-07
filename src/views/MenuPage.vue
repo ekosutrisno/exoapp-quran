@@ -17,8 +17,16 @@
             </div>
          </div>
          <div class="absolute z-30 right-4 text-gray-200 p-4 rounded-lg bg-opacity-75">
-            <img class="w-14 h-14 rounded-full mx-auto ring-2 ring-indigo-400 ring-opacity-75" src="../assets/logo.png" alt="avatar">
-            <h1 class="font-semibold text-center text-sm sm:text-base">Account</h1>
+           <button v-if="!isLogin" @click="siginWithGoogle"  type="button" class=" py-1 px-2 sm:py-3 sm:px-4 inline-flex items-center text-sm sm:text-lg rounded hover:bg-opacity-80 font-semibold text-gray-300 bg-gray-800 focus:outline-none">
+               <GoogleIcon class="w-6 mr-2"/><span>Login</span>
+            </button>
+            <div v-else-if="isLogin" class="text-center">
+               <img class="w-11 h-11 rounded-full mx-auto ring-2 ring-indigo-400 ring-opacity-75" :src="currentUser.photo_url" alt="avatar">
+               <h1 class="font-semibold text-center my-1 text-sm sm:text-base"> {{currentUser.username}}</h1>   
+               <button @click="onLogout" type="button" class="py-1 px-2 sm:py-3 sm:px-4 text-xs sm:text-lg rounded hover:bg-opacity-80 font-semibold text-gray-300 bg-gray-800 focus:outline-none">
+                 <span>Logout</span>
+               </button>
+            </div>
          </div>
       </div>
       
@@ -56,101 +64,129 @@
    </div>
 </template>
 <script>
+import { computed, reactive, toRefs } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
 import CardMenu from '../components/CardMenu.vue'
 import CardMenuSimple from '../components/CardMenuSimple.vue'
+import GoogleIcon from '../components/icon/GoogleIcon.vue'
+
 export default {
-  components: { CardMenu, CardMenuSimple },
-  data(){
-     return{
-        onSearch: false,
-        aNumber: 1,
-        sNumber: 1,
-        menus:[
-           {
-              menuId: '6bfbaca3-8a42-4ff6-b1dc-9086730e8809',
-              count: 114,
-              menuTitle: 'Surat',
-              menuDesc:'Index',
-              to:'/surah-page',
-              img:'https://i.pinimg.com/236x/e9/78/b4/e978b4bf0f3950683bf0001f8faabeac.jpg'
-           },
-           {
-              menuId: '0f052c8e-d6ce-4509-aa9f-fd230a5ed711',
-              count: 604,
-              menuTitle: 'Page',
-              menuDesc:'Index',
-              to:'/page-page',
-              img:'https://i.pinimg.com/236x/ac/7f/d1/ac7fd15615d761f8d1c4425ecad8b1d2.jpg'
-           },
-           {
-              menuId: '56c77d66-354f-446e-b132-c42ad69ba9ab',
-              count: 7,
-              menuTitle: 'Manzil',
-              menuDesc:'Index',
-              to:'/manzil-page',
-              img:'https://i.pinimg.com/236x/4f/b3/8d/4fb38d6d60638e2de1358f6954246a5e.jpg'
-           },
-           {
-              menuId: '9738964e-942b-4a71-8feb-61fa5e7d039d',
-              count: 556,
-              menuTitle: 'Rukuk',
-              menuDesc:'Index',
-              to:'/rukuk-page',
-              img:'https://i.pinimg.com/236x/e3/5f/50/e35f50ec52a39fa5465d12babc2c031a.jpg'
-           },
-           {
-              menuId: 'b0b9e184-e26c-4a98-adb3-7b7be7343a6b',
-              count: 15,
-              menuTitle: 'Sajda',
-              menuDesc:'Index',
-              to:'/sajda-page',
-              img:'https://i.pinimg.com/236x/b7/3c/2c/b73c2cb3e6915eeaf025891539b042ee.jpg'
-           },
-           {
-              menuId: '0abd415e-78e8-4f74-a443-2f23d714823d',
-              count: 30,
-              menuTitle: 'Juz',
-              menuDesc:'Index',
-              to:'/juz-page',
-              img:'https://i.pinimg.com/236x/1c/5f/54/1c5f543ac90d4f029d8e6e994fb458f4.jpg'
-           },
-        ],
-        simpleMenus:[
-           {
-              menuId:'3abc0315-d282-4b55-9977-df55d45e7e07',
-              img:'https://i.pinimg.com/236x/1b/6e/8a/1b6e8a36d12bf9f965d3875fd08f4022.jpg',
-              title: 'Bacaanku',
-              desc:'Menandai bacaan terakhir'
-           },
-           {
-              menuId:'59d11aa8-a869-4db9-88ab-541fa4515ca8',
-              img:'https://i.pinimg.com/236x/ac/7f/d1/ac7fd15615d761f8d1c4425ecad8b1d2.jpg',
-              title: 'Favorit',
-              desc:'Koleksi ayat-ayat favorit'
-           },
-           {
-              menuId:'7bc03ac7-3368-4f72-b84b-69edfeff1e4f',
-              img:'https://i.pinimg.com/236x/d8/b6/87/d8b687118ccba1b24039a1a426fd9955.jpg',
-              title: 'Tajwid',
-              desc:'Belajar tajwid'
-           }
-        ]
+  components: { CardMenu, CardMenuSimple, GoogleIcon },
+  setup(){
+     const store = useStore();
+     const router = useRouter();
+
+     const state = reactive({
+         onSearch: false,
+         isLogin: computed(() => store.state.account.meId),
+         currentUser: computed(() => store.state.account.currentUser),
+         aNumber: 1,
+         sNumber: 1,
+         menus:[
+            {
+               menuId: '6bfbaca3-8a42-4ff6-b1dc-9086730e8809',
+               count: 114,
+               menuTitle: 'Surat',
+               menuDesc:'Index',
+               to:'/surah-page',
+               img:'https://i.pinimg.com/236x/e9/78/b4/e978b4bf0f3950683bf0001f8faabeac.jpg'
+            },
+            {
+               menuId: '0f052c8e-d6ce-4509-aa9f-fd230a5ed711',
+               count: 604,
+               menuTitle: 'Page',
+               menuDesc:'Index',
+               to:'/page-page',
+               img:'https://i.pinimg.com/236x/ac/7f/d1/ac7fd15615d761f8d1c4425ecad8b1d2.jpg'
+            },
+            {
+               menuId: '56c77d66-354f-446e-b132-c42ad69ba9ab',
+               count: 7,
+               menuTitle: 'Manzil',
+               menuDesc:'Index',
+               to:'/manzil-page',
+               img:'https://i.pinimg.com/236x/4f/b3/8d/4fb38d6d60638e2de1358f6954246a5e.jpg'
+            },
+            {
+               menuId: '9738964e-942b-4a71-8feb-61fa5e7d039d',
+               count: 556,
+               menuTitle: 'Rukuk',
+               menuDesc:'Index',
+               to:'/rukuk-page',
+               img:'https://i.pinimg.com/236x/e3/5f/50/e35f50ec52a39fa5465d12babc2c031a.jpg'
+            },
+            {
+               menuId: 'b0b9e184-e26c-4a98-adb3-7b7be7343a6b',
+               count: 15,
+               menuTitle: 'Sajda',
+               menuDesc:'Index',
+               to:'/sajda-page',
+               img:'https://i.pinimg.com/236x/b7/3c/2c/b73c2cb3e6915eeaf025891539b042ee.jpg'
+            },
+            {
+               menuId: '0abd415e-78e8-4f74-a443-2f23d714823d',
+               count: 30,
+               menuTitle: 'Juz',
+               menuDesc:'Index',
+               to:'/juz-page',
+               img:'https://i.pinimg.com/236x/1c/5f/54/1c5f543ac90d4f029d8e6e994fb458f4.jpg'
+            },
+         ],
+         simpleMenus:[
+            {
+               menuId:'3abc0315-d282-4b55-9977-df55d45e7e07',
+               img:'https://i.pinimg.com/236x/1b/6e/8a/1b6e8a36d12bf9f965d3875fd08f4022.jpg',
+               title: 'Bacaanku',
+               desc:'Menandai bacaan terakhir',
+               to: localStorage.getItem('user_id') ? '/bacaanku-page':'/menu'
+            },
+            {
+               menuId:'59d11aa8-a869-4db9-88ab-541fa4515ca8',
+               img:'https://i.pinimg.com/236x/ac/7f/d1/ac7fd15615d761f8d1c4425ecad8b1d2.jpg',
+               title: 'Favorit',
+               desc:'Koleksi ayat-ayat favorit',
+               to: localStorage.getItem('user_id') ? '/favorit-page': '/menu'
+            },
+            {
+               menuId:'7bc03ac7-3368-4f72-b84b-69edfeff1e4f',
+               img:'https://i.pinimg.com/236x/d8/b6/87/d8b687118ccba1b24039a1a426fd9955.jpg',
+               title: 'Tajwid',
+               desc:'Belajar tajwid',
+               to:'/tajwid-page'
+            }
+         ]
+     });
+
+     const onSearching = ()=>{
+        state.onSearch = !state.onSearch
      }
-  },
-  methods:{
-     onSearching(){
-        this.onSearch = !this.onSearch
-     },
-     doSearch(){
-        this.$router.push({
+     const doSearch = ()=>{
+        router.push({
               name: 'QuranAyatDetail', 
             query:{ 
-               sn: this.sNumber, 
-               an: this.aNumber
+               sn: state.sNumber, 
+               an: state.aNumber
             }
          });
      }
+     const siginWithGoogle = ()=>{
+        store.dispatch('account/loginWithGoogle');
+     }
+
+     const onLogout = ()=>{
+        store.dispatch('account/logoutFromGoogle')
+        window.location.reload();
+     }
+     return{
+        ...toRefs(state),
+        onSearching,
+        doSearch,
+        onLogout,
+        siginWithGoogle
+
+     }
   }
-   
 }
 </script>

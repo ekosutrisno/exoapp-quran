@@ -1,5 +1,5 @@
 <template>
-   <router-link to="/menu">
+   <router-link :to="simpleMenu.to">
       <div class="transition-shadow relative h-20 duration-300 flex overflow-hidden flex-col bg-white rounded-md shadow-sm hover:shadow-xl">
          <div class="max-h-72 w-full overflow-hidden absolute inset-0">
             <img class="w-full h-28 sm:h-full max-h-72 object-cover" :src="simpleMenu.img" />

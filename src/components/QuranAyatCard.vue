@@ -35,19 +35,32 @@
 
    <!-- Menu Options -->
    <div class="absolute right-0 bottom-0 p-2">
-      <div @click="hideMenuOption" class="relative">
+      <div v-if="isLogin" @click="hideMenuOption" class="relative">
          <svg class="sm:cursor-pointer w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
          </svg>
          
-         <div v-click-away="hideMenuOption" v-if="option" class="w-32 absolute z-50 shadow-xl h-auto left-0 bottom-0 -ml-28 mt-6 py-1 bg-gray-50 rounded flex flex-col overflow-hidden">
-               <button type="button" class="w-full text-xs group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
+         <div v-click-away="hideMenuOption" v-if="option" class="w-40 absolute z-50 shadow-xl h-auto left-0 bottom-0 -ml-36 mt-6 py-1 bg-gray-50 rounded flex flex-col overflow-hidden">
+               <button @click="ontandaiBacaan(ayat)" type="button" class="w-full text-sm group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
                   <span>Tandai bacaan</span>
                </button>
-               <button type="button" class="w-full text-xs group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
+               <button @click="onTambahFavorit(ayat)" type="button" class="w-full text-sm group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
                   <span>Ayat favorit</span>
                </button>
-            </div>
+         </div>
+      </div>
+      <div v-else @click="hideMenuOption" class="relative">
+         <svg class="sm:cursor-pointer w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+         </svg>
+         <div v-click-away="hideMenuOption" v-if="option" class="w-40 absolute z-50 shadow-xl h-auto left-0 bottom-0 -ml-36 mt-6 py-1 bg-gray-50 rounded flex flex-col overflow-hidden">
+               <button type="button" class="w-full text-sm group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
+                  <span>Tandai bacaan</span>
+               </button>
+               <button type="button" class="w-full text-sm group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
+                  <span>Ayat favorit</span>
+               </button>
+         </div>
       </div>
    </div>
 </div>
@@ -55,6 +68,7 @@
 
 <script>
 import { reactive, toRefs } from 'vue';
+import store from '../store';
 export default {
    props:{
       ayat:{
@@ -62,35 +76,45 @@ export default {
       }
    },
    setup(){
-         const data = reactive({
-            playAudio: false,
-            option: false
-         });
+      const data = reactive({
+         playAudio: false,
+         option: false,
+         isLogin: localStorage.getItem('user_id')
+      });
 
-        const convertToArab = (str) => {
-         var find = ['0','1','2','3','4','5','6','7','8','9'];
-         var replace = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-         if(str !== undefined)
-            for (var i = 0; i < find.length; i++) {
-               str = str.toString().replace(new RegExp(find[i],"g"), replace[i]);
-            }
+      const convertToArab = (str) => {
+      var find = ['0','1','2','3','4','5','6','7','8','9'];
+      var replace = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+      if(str !== undefined)
+         for (var i = 0; i < find.length; i++) {
+            str = str.toString().replace(new RegExp(find[i],"g"), replace[i]);
+         }
 
          return str;
       };
+
+      const ontandaiBacaan = (ayat)=>{
+         store.dispatch('account/onMarkBacaanku', ayat)
+      }
+      const onTambahFavorit = (ayat)=>{
+         store.dispatch('account/onMarkFavorit', ayat)
+      }
 
       const togglePlay = ()=>{
          data.playAudio = !data.playAudio;
       }
 
-       const hideMenuOption = () => {
-            data.option = !data.option
-         }
+      const hideMenuOption = () => {
+         data.option = !data.option
+      }
 
       return{
          ...toRefs(data),
          convertToArab,
          togglePlay,
-         hideMenuOption
+         hideMenuOption,
+         ontandaiBacaan,
+         onTambahFavorit
       }
    }
 }
