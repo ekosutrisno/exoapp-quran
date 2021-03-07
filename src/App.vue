@@ -10,7 +10,8 @@ export default {
 setup(){
     const store = useStore();
     
-    onMounted(async ()=>{ 
+    onMounted(async () => { 
+        await store.dispatch('account/onAuthStateChange');
         await store.dispatch('surah/setSurahs');
         await store.dispatch('sajda/setSajda');
         await store.dispatch('juz/setJuz');

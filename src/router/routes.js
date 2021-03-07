@@ -8,7 +8,14 @@ import QuranSajdaList from "../views/QuranSajdaList.vue";
 import QuranRukukList from "../views/QuranRukukList.vue";
 import QuranAyatDetail from "../views/QuranAyatDetail.vue";
 import QuranPagesList from "../views/QuranPagesList.vue";
+import QuranAyatBacaanku from "../views/QuranAyatBacaanku.vue";
+import QuranAyatFavorit from "../views/QuranAyatFavorit.vue";
 const routes = [
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("../views/NotFound.vue"),
+  },
   {
     path: "/",
     name: "HomePage",
@@ -58,6 +65,16 @@ const routes = [
     path: "/quran-ayat-detail",
     name: "QuranAyatDetail",
     component: QuranAyatDetail,
+  },
+  {
+    path: "/bacaanku-page",
+    name: "BacaankuPage",
+    component: QuranAyatBacaanku,
+  },
+  {
+    path: "/favorit-page",
+    name: "FavoritPage",
+    component: QuranAyatFavorit,
   },
 ];
 
