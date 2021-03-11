@@ -13,7 +13,7 @@
                   <div class="rounded-full cursor-pointer p-1 inline-flex items-center absolute w-8 h-8 -right-3 bottom-0 bg-gray-50 ring-1 ring-gray-200">
                      <span class="mx-auto">😻</span>
                   </div>
-                  <img class="object-cover" :src="currentUser ? currentUser.photoURL: 'https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4'" alt="my-avatar">
+                  <img class="object-cover w-full h-full rounded-full" :src="currentUser ? currentUser.photoURL: 'https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4'" alt="my-avatar">
                </div>
                <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Rukuk</h1>
                <p class="font-semibold text-gray-100 md:text-lg text-center">Terdapat Total <span class="font-semibold text-indigo-400">556</span> Rukuk</p>
