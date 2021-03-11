@@ -95,7 +95,7 @@ export default {
          ? computed(()=> store.state.ayat.surat_detail)
          : computed(()=> store.state.filterAyat.surat),
          ayats: [],
-         ayat: {}
+         ayat: {},
       })
 
       onMounted( async ()=>{ 

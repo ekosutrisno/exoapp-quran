@@ -20,7 +20,7 @@
            <button v-if="!isLogin" @click="siginWithGoogle"  type="button" class=" py-1 px-2 sm:py-3 sm:px-4 inline-flex items-center text-sm sm:text-lg rounded hover:bg-opacity-80 font-semibold text-gray-300 bg-gray-800 focus:outline-none">
                <GoogleIcon class="w-6 mr-2"/><span>Login</span>
             </button>
-            <div v-else-if="isLogin" class="text-center">
+            <div v-else-if="isLogin && currentUser" class="text-center">
                <img class="w-11 h-11 rounded-full mx-auto ring-2 ring-indigo-400 ring-opacity-75" :src="currentUser.photo_url" alt="avatar">
                <h1 class="font-semibold text-center my-1 text-sm sm:text-base"> {{currentUser.username}}</h1>   
                <button @click="onLogout" type="button" class="py-1 px-2 sm:py-3 sm:px-4 text-xs sm:text-lg rounded hover:bg-opacity-80 font-semibold text-gray-300 bg-gray-800 focus:outline-none">
@@ -140,14 +140,14 @@ export default {
                img:'https://i.pinimg.com/236x/1b/6e/8a/1b6e8a36d12bf9f965d3875fd08f4022.jpg',
                title: 'Bacaanku',
                desc:'Menandai bacaan terakhir',
-               to: localStorage.getItem('user_id') ? '/bacaanku-page':'/menu'
+               to: '/bacaanku-page'
             },
             {
                menuId:'59d11aa8-a869-4db9-88ab-541fa4515ca8',
                img:'https://i.pinimg.com/236x/ac/7f/d1/ac7fd15615d761f8d1c4425ecad8b1d2.jpg',
                title: 'Favorit',
                desc:'Koleksi ayat-ayat favorit',
-               to: localStorage.getItem('user_id') ? '/favorit-page': '/menu'
+               to: '/favorit-page'
             },
             {
                menuId:'7bc03ac7-3368-4f72-b84b-69edfeff1e4f',

@@ -16,7 +16,7 @@
                   <div class="rounded-full cursor-pointer p-1 inline-flex items-center absolute w-8 h-8 -right-3 bottom-0 bg-gray-50 ring-1 ring-gray-200">
                      <span class="mx-auto">😻</span>
                   </div>
-                  <img class="object-cover" src="https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" alt="my-avatar">
+                   <img class="object-cover" :src="currentUser ? currentUser.photoURL : 'https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4'" alt="my-avatar">
                </div>
                <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Favorit</h1>
                <p class="font-semibold text-gray-100 md:text-lg text-center">Koleksi Ayat-ayat favorit</p>
@@ -35,7 +35,38 @@
             <p class="text-center text-sm text-gray-600">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
         </div>
          <div class="mx-auto w-full">
-            <QuranAyatCard v-for="ayat in ayats" :key="ayat.aya_id" :ayat="ayat"/>
+            <QuranAyatFavoriteCard v-for="ayat in ayats" :key="ayat.aya_id" :ayat="ayat"/>
+         </div>
+         <div v-if="!ayats.length && isLogin" class="mx-auto w-full max-w-sm">
+            <router-link to="/menu">
+               <div class="transition-shadow relative h-20 duration-300 flex overflow-hidden flex-col bg-white rounded-md shadow-sm hover:shadow-xl">
+                  <div class="max-h-72 w-full overflow-hidden absolute inset-0">
+                     <img class="w-full h-28 sm:h-full max-h-72 object-cover" src="https://i.pinimg.com/236x/d8/b6/87/d8b687118ccba1b24039a1a426fd9955.jpg" />
+                  </div>
+                  <div class="h-16 absolute z-30 sm:h-full max-h-72 w-full overflow-hidden py-2 px-3 md:p-5">
+                     <span class="font-semibold text-white">Belum Ada Ayat Favorit</span> 
+                     <p class="text-xs text-gray-100">Silahkan cari ayat favorit Kamu🎀</p>
+                  </div>
+                  <div class="bg-gray-900 absolute inset-0 z-20 bg-opacity-30"></div>
+               </div>
+            </router-link>
+         </div>
+         <div v-if="!isLogin" class="mx-auto w-full max-w-sm">
+            <router-link to="/menu">
+               <div class="transition-shadow relative h-20 duration-300 flex overflow-hidden flex-col bg-white rounded-md shadow-sm hover:shadow-xl">
+                  <div class="max-h-72 w-full overflow-hidden absolute inset-0">
+                     <img class="w-full h-28 sm:h-full max-h-72 object-cover" src="https://i.pinimg.com/236x/d8/b6/87/d8b687118ccba1b24039a1a426fd9955.jpg" />
+                  </div>
+                  <div class="h-16 absolute z-30 sm:h-full max-h-72 w-full overflow-hidden py-2 px-3 md:p-5">
+                     <span class="font-semibold text-white">Fitur Non Aktif</span> 
+                     <p class="text-xs text-gray-100">Fitur akan aktif setelah Login🎀</p>
+                  </div>
+                  <div class="bg-gray-900 absolute inset-0 z-20 bg-opacity-30"></div>
+               </div>
+            </router-link>
+         </div>
+         <div class="w-full mx-auto max-w-lg text-xs rounded-md text-center bg-gray-100 mt-10 shadow-sm max-h-16 h-full p-2">
+               <p>✨: Kamu dapat menyimpan ayat-ayat favorit disini.</p>
          </div>
      </div>
    </section>
@@ -44,27 +75,28 @@
 </template>
 
 <script>
-import { computed, onBeforeMount, onMounted, reactive,  toRefs } from 'vue';
+import { computed, onMounted, reactive,  toRefs } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import QuranAyatCard from '../components/QuranAyatCard.vue';
 import Spinner from '../components/Spinner.vue';
+import QuranAyatFavoriteCard from '../components/QuranAyatFavoriteCard.vue';
+import { auth } from '../service/firebase';
 export default {
-  components: { QuranAyatCard, Spinner },
+  components: {  Spinner, QuranAyatFavoriteCard },
    setup(){
       const store = useStore();
       const router = useRouter();
 
       const state = reactive({
          isProcess: computed(()=> store.state.account.isLoading),
-         ayats: computed(()=> store.state.account.ayatFavorit)
+         ayats: computed(()=> store.state.account.ayatFavorit),
+         isLogin: computed(()=> localStorage.getItem('user_id')),
+         currentUser: computed(()=> auth.currentUser)
       })
 
-      onMounted(()=>store.dispatch('account/onGetFavorit'))
-
-      onBeforeMount(()=>{
-         if (!localStorage.getItem('user_id')) {
-            router.push('/menu')
+      onMounted(()=>{
+         if (state.isLogin) {
+            store.dispatch('account/onGetFavorit')
          }
       })
 

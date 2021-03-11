@@ -23,13 +23,18 @@
       </audio>
    </div>
    
-   <div class="text-xs w-full font-normal mt-3 text-left"> 
+   <div class="text-xs w-full inline-flex space-x-1 items-center font-normal mt-3 text-left"> 
+      <span  class="font-semibold text-pink-600">
+        <svg class="w-4 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+        </svg>
+      </span>
       <span class="font-medium">Info: (Hal: {{ayat.page_number}})(Manzil: {{ayat.manzil}})(Rukuk: {{ayat.rukuk}}) </span>
       <span v-if="ayat.sajda" class="font-semibold text-yellow-500">
-      - Sajda 
-      <svg class="w-4 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-         <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-      </svg>
+         - Sajda 
+         <svg class="w-4 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+         </svg>
       </span>
    </div>
 
@@ -44,21 +49,8 @@
                <button @click="ontandaiBacaan(ayat)" type="button" class="w-full text-sm group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
                   <span>Tandai bacaan</span>
                </button>
-               <button @click="onTambahFavorit(ayat)" type="button" class="w-full text-sm group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
-                  <span>Ayat favorit</span>
-               </button>
-         </div>
-      </div>
-      <div v-else @click="hideMenuOption" class="relative">
-         <svg class="sm:cursor-pointer w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-         </svg>
-         <div v-click-away="hideMenuOption" v-if="option" class="w-40 absolute z-50 shadow-xl h-auto left-0 bottom-0 -ml-36 mt-6 py-1 bg-gray-50 rounded flex flex-col overflow-hidden">
-               <button type="button" class="w-full text-sm group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
-                  <span>Tandai bacaan</span>
-               </button>
-               <button type="button" class="w-full text-sm group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-900 hover:bg-gray-200 inline-flex space-x-2">
-                  <span>Ayat favorit</span>
+               <button @click="onRemoveFavorit(ayat)" type="button" class="w-full text-sm group transition-colors cursor-default sm:cursor-pointer duration-300 text-gray-700 focus:outline-none py-2 px-3 hover:text-gray-100 hover:bg-indigo-400 inline-flex space-x-2">
+                  <span>Hapus Favorit</span>
                </button>
          </div>
       </div>
@@ -96,10 +88,10 @@ export default {
       };
 
       const ontandaiBacaan = (ayat)=>{
-         store.dispatch('account/onMarkBacaanku', ayat)
+         store.dispatch('account/onMarkBacaanku', ayat);
       }
-      const onTambahFavorit = (ayat)=>{
-         store.dispatch('account/onMarkFavorit', ayat)
+      const onRemoveFavorit = (ayat)=>{
+         store.dispatch('account/onRemoveFavorit', ayat);
       }
 
       const togglePlay = ()=>{
@@ -116,7 +108,7 @@ export default {
          togglePlay,
          hideMenuOption,
          ontandaiBacaan,
-         onTambahFavorit
+         onRemoveFavorit
       }
    }
 }

@@ -13,7 +13,7 @@
                   <div class="rounded-full cursor-pointer p-1 inline-flex items-center absolute w-8 h-8 -right-3 bottom-0 bg-gray-50 ring-1 ring-gray-200">
                      <span class="mx-auto">😻</span>
                   </div>
-                  <img class="object-cover" src="https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" alt="my-avatar">
+                  <img class="object-cover" :src="currentUser ? currentUser.photoURL: 'https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4'" alt="my-avatar">
                </div>
                <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Rukuk</h1>
                <p class="font-semibold text-gray-100 md:text-lg text-center">Terdapat Total <span class="font-semibold text-indigo-400">556</span> Rukuk</p>
@@ -75,6 +75,7 @@ import { useStore } from 'vuex';
 import QuranRukukCard from '../components/QuranRukukCard.vue';
 import Spinner from '../components/Spinner.vue';
 import Loader from '../components/Loader.vue';
+import { auth } from '../service/firebase';
 export default {
   components: { QuranRukukCard, Spinner, Loader },
    setup(){
@@ -89,6 +90,7 @@ export default {
          rukuk: computed(()=> store.state.rukuk.rukuk),
          firstRukukVisible: computed(()=> store.state.rukuk.firstRukukVisible),
          lastRukukVisible: computed(()=> store.state.rukuk.lastRukukVisible),
+         currentUser: computed(()=> auth.currentUser)
       })
 
       const searching = computed(()=> state.searchInput.trim() !== '');

@@ -139,14 +139,24 @@ const account = {
         .collection("favorits")
         .get()
         .then((doc) => {
-          if (doc.docs.length > 0) {
-            let dataAyat = [];
-            doc.docs.forEach((ayat) => {
-              dataAyat.push(ayat.data());
-            });
+          let dataAyat = [];
+          doc.docs.forEach((ayat) => {
+            dataAyat.push(ayat.data());
+          });
 
-            commit("SET_AYAT_FAVORIT", dataAyat);
-          }
+          commit("SET_AYAT_FAVORIT", dataAyat);
+        });
+    },
+    async onRemoveFavorit({ dispatch }, payload) {
+      var user_id = auth.currentUser.uid;
+      await firestore
+        .collection("account")
+        .doc(user_id)
+        .collection("favorits")
+        .doc(payload.aya_id.toString())
+        .delete()
+        .then(() => {
+          dispatch("onGetFavorit");
         });
     },
   },

@@ -16,10 +16,10 @@
                   <div class="rounded-full cursor-pointer p-1 inline-flex items-center absolute w-8 h-8 -right-3 bottom-0 bg-gray-50 ring-1 ring-gray-200">
                      <span class="mx-auto">😻</span>
                   </div>
-                  <img class="object-cover" src="https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" alt="my-avatar">
+                  <img class="object-cover" :src="currentUser ? currentUser.photoURL: 'https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4'" alt="my-avatar">
                </div>
                <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Bacaanku</h1>
-               <p class="font-semibold text-gray-100 md:text-lg text-center">Surat ke <span class="font-semibold text-indigo-400"> {{ ayat.sura_id}} </span> Ayat <span class="font-semibold text-indigo-400"> {{ ayat.aya_number}} </span></p>
+               <p v-if="ayats" class="font-semibold text-gray-100 md:text-lg text-center">Surat ke <span class="font-semibold text-indigo-400"> {{ ayats.sura_id}} </span> Ayat <span class="font-semibold text-indigo-400"> {{ ayats.aya_number}} </span></p>
          </div>
          <div class="w-full md:mx-auto max-w-3xl -mb-24 bg-white z-40 mt-4 rounded-lg h-16">
                <div class="flex flex-col md:flex-row items-center justify-center text-xl md:text-3xl divide-y md:divide-y-0 md:divide-x h-full">
@@ -34,14 +34,45 @@
         <div class="mb-4 mx-auto"><div class="font-quran text-center mb-2 text-xl font-semibold">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
             <p class="text-center text-sm text-gray-600">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
         </div>
-         <div class="mx-auto w-full">
-            <QuranAyatCard :ayat="ayat"/>
+         <div v-if="ayats && isLogin" class="mx-auto w-full">
+            <QuranAyatCard :ayat="ayats"/>
          </div>
-         <div class="flex mx-auto items-center my-4 justify-center">
+         <div v-if="ayats && isLogin" class="flex mx-auto items-center my-4 justify-center">
             <button @click="onLanjutBacaan" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:outline-none"><span>Lanjut Bacaan</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                </svg></span> 
             </button>
+         </div>
+         <div v-if="!ayats && isLogin" class="mx-auto w-full max-w-sm">
+            <router-link to="/menu">
+               <div class="transition-shadow relative h-20 duration-300 flex overflow-hidden flex-col bg-white rounded-md shadow-sm hover:shadow-xl">
+                  <div class="max-h-72 w-full overflow-hidden absolute inset-0">
+                     <img class="w-full h-28 sm:h-full max-h-72 object-cover" src="https://i.pinimg.com/236x/d8/b6/87/d8b687118ccba1b24039a1a426fd9955.jpg" />
+                  </div>
+                  <div class="h-16 absolute z-30 sm:h-full max-h-72 w-full overflow-hidden py-2 px-3 md:p-5">
+                     <span class="font-semibold text-white">Kamu belum menandai Ayat </span> 
+                     <p class="text-xs text-gray-100">Silahkan pilih bacaan terakhir Kamu🎀</p>
+                  </div>
+                  <div class="bg-gray-900 absolute inset-0 z-20 bg-opacity-30"></div>
+               </div>
+            </router-link>
+         </div>
+         <div v-if="!isLogin" class="mx-auto w-full max-w-sm">
+            <router-link to="/menu">
+               <div class="transition-shadow relative h-20 duration-300 flex overflow-hidden flex-col bg-white rounded-md shadow-sm hover:shadow-xl">
+                  <div class="max-h-72 w-full overflow-hidden absolute inset-0">
+                     <img class="w-full h-28 sm:h-full max-h-72 object-cover" src="https://i.pinimg.com/236x/d8/b6/87/d8b687118ccba1b24039a1a426fd9955.jpg" />
+                  </div>
+                  <div class="h-16 absolute z-30 sm:h-full max-h-72 w-full overflow-hidden py-2 px-3 md:p-5">
+                     <span class="font-semibold text-white">Fitur Non Aktif</span> 
+                     <p class="text-xs text-gray-100">Fitur akan aktif setelah Login🎀</p>
+                  </div>
+                  <div class="bg-gray-900 absolute inset-0 z-20 bg-opacity-30"></div>
+               </div>
+            </router-link>
+         </div>
+         <div class="w-full mx-auto max-w-lg text-xs rounded-md text-center bg-gray-100 mt-10 shadow-sm max-h-16 h-full p-2">
+               <p>🎀: Kamu dapat dengan mudah melanjutkan bacaan terakhir Kamu dari sini.</p>
          </div>
      </div>
    </section>
@@ -50,11 +81,12 @@
 </template>
 
 <script>
-import { computed, onBeforeMount, onMounted, reactive,  toRefs } from 'vue';
+import { computed, onMounted, reactive,  toRefs } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import QuranAyatCard from '../components/QuranAyatCard.vue';
 import Spinner from '../components/Spinner.vue';
+import { auth } from '../service/firebase';
 export default {
   components: { QuranAyatCard, Spinner },
    setup(){
@@ -63,19 +95,20 @@ export default {
 
       const state = reactive({
          isProcess: computed(()=> store.state.account.isLoading),
-         ayat: computed(()=> store.state.account.bacaanku)
+         ayats: computed(()=> store.state.account.bacaanku) ||null,
+         isLogin: computed(()=>localStorage.getItem('user_id')),
+         currentUser: computed(()=> auth.currentUser)
       })
 
-      onMounted(()=>store.dispatch('account/onGetBacaanku'))
-
-      onBeforeMount(()=>{
-         if (!localStorage.getItem('user_id')) {
-            router.push('/menu')
+      onMounted(()=>{
+         if(state.isLogin){
+            store.dispatch('account/onGetBacaanku');
          }
+            
       })
 
       const onLanjutBacaan = ()=>{
-         router.push({name: 'QuranAyatDetail', query:{ sn: state.ayat.sura_id, an: state.ayat.aya_number}})
+         router.push({name: 'QuranAyatDetail', query:{ sn: state.ayats.sura_id, an: state.ayats.aya_number}})
       }
 
       const convertToArab = (str) => {
