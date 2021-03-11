@@ -13,7 +13,7 @@
                   <div class="rounded-full cursor-pointer p-1 inline-flex items-center absolute w-8 h-8 -right-3 bottom-0 bg-gray-50 ring-1 ring-gray-200">
                      <span class="mx-auto">😻</span>
                   </div>
-                  <img class="object-cover" src="https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" alt="my-avatar">
+                  <img class="object-cover" :src="currentUser ? currentUser.photoURL: 'https://avatars0.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4'" alt="my-avatar">
                </div>
                <h1 class="text-3xl md:text-5xl font-semibold my-4 text-gray-100">Surat</h1>
                <p class="font-semibold text-gray-100 md:text-lg text-center">Terdapat Total <span class="font-semibold text-indigo-400">114</span> Surat</p>
@@ -73,6 +73,7 @@ import { computed, nextTick, reactive, ref, toRefs, } from 'vue';
 import { useStore } from 'vuex';
 import QuranMetaCard from '../components/QuranMetaCard.vue';
 import Spinner from '../components/Spinner.vue';
+import { auth } from '../service/firebase';
 export default {
   components: { QuranMetaCard, Spinner },
    setup(){
@@ -84,9 +85,10 @@ export default {
 
       const state = reactive({
          isProcess: computed(()=> store.state.surah.isLoading),
+         isOn: false,
          searchInput: '',
          surahs: computed(()=> store.state.surah.surahs),
-         isOn: false
+         currentUser: computed(()=> auth.currentUser)
       })
 
       const searching = computed(()=> state.searchInput.trim() !== '');

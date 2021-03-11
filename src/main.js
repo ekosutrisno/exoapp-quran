@@ -10,7 +10,7 @@ import "aos/dist/aos.css";
 AOS.init({ mirror: true, once: false });
 
 import VueClickAway from "vue3-click-away";
-// https://laracasts.s3.amazonaws.com/series/thumbnails/svg/static-site-generators.svg
+
 createApp(App)
   .use(store)
   .use(router)
