@@ -1,6 +1,6 @@
 <template>
-   <div class="mx-auto w-full max-w-xs my-5 text-sm text-center relative group nv-transition text-gray-800 bg-gray-100 p-2 font-quran font-semibold rounded-full select-none">
-      <h3 class="text-indigo-800">({{surat.surat_golongan}}) | {{surat.surat_text_full}}</h3>
+   <div class="mx-auto w-full max-w-sm my-5 text-sm text-center relative group nv-transition text-gray-800 bg-gray-100 p-2 font-quran font-semibold rounded-full select-none">
+      <h3 class="text-indigo-800">({{surat.surat_golongan}})({{surat.id}}) | {{surat.surat_text_full}}</h3>
       <p> {{surat.surat_name}} <span class="text-gray-500 font-thin"> ({{surat.surat_terjemahan}}) </span><span class="text-gray-500 font-thin"> | {{surat.count_ayat}} Ayat</span> </p>
    </div>
 </template>
@@ -20,7 +20,8 @@ export default {
             surat_text_full:"",
             surat_name:"",
             surat_terjemahan:"",
-            count_ayat:0
+            count_ayat: 0,
+            id:0
 
          }
       });
