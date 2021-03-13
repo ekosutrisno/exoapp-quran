@@ -1,4 +1,5 @@
 <template>
+<CardSurahSeparate v-if="ayat.is_new_surat" :sura_id="ayat.sura_id"/>
 <div class="w-full relative group nv-transition text-gray-800 hover:bg-gray-100 py-4 transition duration-300 max-w-screen-lg mx-auto font-quran font-semibold text-right px-4 text-xl rounded-bl-xl border-r-4 border-transparent sm:cursor-pointer hover:border-gray-400 hover:shadow-sm select-none">
    <p> 
       <span class="group-hover:text-quran-brown-text leading-10">{{ayat.aya_text}}</span>   
@@ -24,6 +25,18 @@
    </div>
    
    <div class="text-xs w-full font-normal mt-3 text-left"> 
+      <span v-if="isIncludeMyFavorite" class="font-semibold text-pink-600">
+        <svg class="w-4 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+        </svg>
+      </span>
+      <span v-if="ayat.aya_id === myBacaanku.aya_id" class="font-semibold text-green-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checks inline" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M7 12l5 5l10 -10"></path>
+            <path d="M2 12l5 5m5 -5l5 -5"></path>
+         </svg>
+      </span>
       <span class="font-medium">Info: (Hal: {{ayat.page_number}})(Manzil: {{ayat.manzil}})(Rukuk: {{ayat.rukuk}}) </span>
       <span v-if="ayat.sajda" class="font-semibold text-yellow-500">
       - Sajda 
@@ -67,36 +80,44 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue';
+import { computed, reactive, toRefs } from 'vue';
 import { useStore } from 'vuex';
+import CardSurahSeparate from './CardSurahSeparate.vue';
 export default {
+  components: { CardSurahSeparate },
    props:{
       ayat:{
          type: Object
       }
    },
-   setup(){
+   setup(props){
       const store = useStore();
 
       const data = reactive({
          playAudio: false,
          option: false,
-         isLogin: localStorage.getItem('user_id')
+         isLogin: localStorage.getItem('user_id'),
+         myBacaanku: computed(()=> store.state.account.bacaanku),
+         myFavorite: computed(()=>store.state.account.ayatFavorit),
+         currentAyat: computed(()=> props.ayat)
       });
 
       const convertToArab = (str) => {
-      var find = ['0','1','2','3','4','5','6','7','8','9'];
-      var replace = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-      if(str !== undefined)
-         for (var i = 0; i < find.length; i++) {
-            str = str.toString().replace(new RegExp(find[i],"g"), replace[i]);
-         }
+         var find = ['0','1','2','3','4','5','6','7','8','9'];
+         var replace = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+         if(str !== undefined)
+            for (var i = 0; i < find.length; i++) {
+               str = str.toString().replace(new RegExp(find[i],"g"), replace[i]);
+            }
 
          return str;
       };
 
       const ontandaiBacaan = (ayat)=>{
-         store.dispatch('account/onMarkBacaanku', ayat)
+         const payload = {
+            nextBacaan: ayat
+         }
+         store.dispatch('account/onMarkBacaanku', payload)
       }
       const onTambahFavorit = (ayat)=>{
          store.dispatch('account/onMarkFavorit', ayat)
@@ -110,8 +131,11 @@ export default {
          data.option = !data.option
       }
 
+      const isIncludeMyFavorite = computed(()=>data.myFavorite.some(ayat => ayat.aya_id === data.currentAyat.aya_id))
+
       return{
          ...toRefs(data),
+         isIncludeMyFavorite,
          convertToArab,
          togglePlay,
          hideMenuOption,

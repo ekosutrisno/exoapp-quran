@@ -82,7 +82,7 @@ import QuranAyatCard from '../components/QuranAyatCard.vue';
 import Spinner from '../components/Spinner.vue';
 import Loader from '../components/Loader.vue';
 export default {
-  components: { QuranAyatCard, Spinner, Loader },
+  components: { QuranAyatCard, Spinner, Loader},
    setup(){
       const store = useStore();
       const route = useRoute();

@@ -1,4 +1,7 @@
+import { useToast } from "vue-toastification";
 import { auth, firestore, googleProvider } from "../../service/firebase";
+
+const toast = useToast();
 
 const account = {
   namespaced: true,
@@ -43,6 +46,7 @@ const account = {
             if (doc.exists) {
               localStorage.setItem("user_id", user.uid);
               commit("SET_CURRENT_USER", doc.data());
+              toast.info(`${user.displayName} berhasil Login.`);
             } else {
               await firestore
                 .collection("account")
@@ -51,6 +55,7 @@ const account = {
                 .then(async () => {
                   localStorage.setItem("user_id", user.uid);
                   await commit("SET_CURRENT_USER", userData);
+                  toast.info(`Welcome ${user.displayName}.`);
                 });
             }
           });
@@ -86,6 +91,7 @@ const account = {
       auth.signOut().then(async () => {
         localStorage.removeItem("user_id");
         await commit("SET_CURRENT_USER", {});
+        toast.info(`Kamu berhasil Logout.`);
       });
     },
 
@@ -94,8 +100,11 @@ const account = {
       await firestore
         .collection("account")
         .doc(user_id)
-        .set({ bacaanku: payload }, { merge: true })
-        .then(() => commit("SET_BACAANKU", payload));
+        .set({ bacaanku: payload.nextBacaan }, { merge: true })
+        .then(async () => {
+          commit("SET_BACAANKU", payload.nextBacaan);
+          toast.info(`Ditandai sebagai Bacaanku.`);
+        });
     },
 
     async onGetBacaanku({ commit }) {
@@ -111,7 +120,7 @@ const account = {
         });
     },
 
-    async onMarkFavorit(_, payload) {
+    async onMarkFavorit({ dispatch }, payload) {
       var user_id = auth.currentUser.uid;
       await firestore
         .collection("account")
@@ -126,7 +135,11 @@ const account = {
               .doc(user_id)
               .collection("favorits")
               .doc(payload.aya_id.toString())
-              .set(payload);
+              .set(payload)
+              .then(() => {
+                dispatch("onGetFavorit");
+                toast.info(`Ditambahkan ke favorit.`);
+              });
           }
         });
     },
@@ -157,6 +170,7 @@ const account = {
         .delete()
         .then(() => {
           dispatch("onGetFavorit");
+          toast.error(`Berhasil dihapus dari favorit.`);
         });
     },
   },
