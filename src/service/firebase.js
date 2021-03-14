@@ -1,6 +1,5 @@
 import firebase from "firebase/app";
 
-import "firebase/analytics";
 import "firebase/firestore";
 import "firebase/auth";
 
@@ -11,14 +10,10 @@ var firebaseConfig = {
   storageBucket: "exoapp-quran.appspot.com",
   messagingSenderId: "922584328277",
   appId: "1:922584328277:web:355328be488b2199658cdc",
-  measurementId: "G-2KW8YXQHVK",
 };
 
 // Initaialize Firebase App
 firebase.initializeApp(firebaseConfig);
-
-// Activate Google Analytics
-firebase.analytics();
 
 // Init Firestore DB
 const firestore = firebase.firestore();

@@ -1,4 +1,4 @@
-## <img alt="vue" src="https://avatars.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" width="20" height="20" /> E-Quran v0.0.1
+## <img alt="vue" src="https://avatars.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" width="20" height="20" /> E-Quran
 
 [![ExoApps](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://exoappsv2.netlify.app/) [![Netlify Status](https://api.netlify.com/api/v1/badges/85cc322b-1eaf-40d2-88fa-a08de1b349bd/deploy-status)](https://app.netlify.com/sites/nifty-pare-1c0d74/deploys)
 
@@ -6,7 +6,9 @@
 
 - Intoductions
   - It is a Web App portfolio.
-  - Design Inspired by Quran Kemenag.
+  - Design Inspired by Quran Kemenag (Indonesia).
+  - Meta From Quran Cloud
+  - All My Modified Data Assets in [ExoApp](https://github.com/ExoApp/exoapp-quran-data)
 - Tech Stack
   - <img src="https://img.icons8.com/fluent/48/000000/visual-studio-code-2019.png" width="14" height="14"/> Vs Code
   - <img alt="vue" src="https://v3.vuejs.org/logo.png" width="11" height="11" /> Vue v3.0.0
@@ -47,6 +49,6 @@ npm run lint
   - Have a Google Account.
   - Go to firebase.com to use firebase.
   - Create Project.
-  - Authentication: enable auth with `email` and `password`.
+  - Enable auth with Google.
   - Enable Firestore.
-  - ExoApps ready to use, Finish.
+  - E-Quran ready to use, Finish.
