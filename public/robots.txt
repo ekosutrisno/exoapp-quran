@@ -1,2 +1,3 @@
 User-agent: *
-Disallow:
+Disallow: /bacaanku-page/
+Disallow: /favorit-page/
