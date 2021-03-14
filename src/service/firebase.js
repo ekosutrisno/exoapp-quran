@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 
+import "firebase/analytics";
 import "firebase/firestore";
 import "firebase/auth";
 
@@ -13,14 +14,20 @@ var firebaseConfig = {
   measurementId: "G-2KW8YXQHVK",
 };
 
+// Initaialize Firebase App
 firebase.initializeApp(firebaseConfig);
+
+// Activate Google Analytics
 firebase.analytics();
 
+// Init Firestore DB
 const firestore = firebase.firestore();
+
+// Activate Firebase Authentications
 const auth = firebase.auth();
-//Set Auth language for Provider
 auth.useDeviceLanguage();
 
+// Activate Sign With Google
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 export { firestore, auth, googleProvider };
