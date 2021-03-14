@@ -11,7 +11,6 @@ var firebaseConfig = {
   storageBucket: "exoapp-quran.appspot.com",
   messagingSenderId: "922584328277",
   appId: "1:922584328277:web:355328be488b2199658cdc",
-  measurementId: "G-VQ6GZ2JZEM",
 };
 
 // Initaialize Firebase App
