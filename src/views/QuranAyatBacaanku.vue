@@ -38,7 +38,7 @@
             <QuranAyatCard :ayat="ayats"/>
          </div>
          <div v-if="ayats && isLogin" class="flex mx-auto items-center my-4 justify-center">
-            <button @click="onLanjutBacaan" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:outline-none"><span>Lanjut Bacaan</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <button @click="onLanjutBacaan" class="py-2 px-3 inline-flex items-center space-x-2 transition rounded-lg bg-indigo-500 hover:bg-indigo-600 text-gray-100 focus:outline-none"><span>Lanjut Bacaan</span> <span><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                </svg></span> 
             </button>
@@ -71,7 +71,7 @@
                </div>
             </router-link>
          </div>
-         <div class="w-full mx-auto max-w-lg text-xs rounded-md text-center bg-gray-100 mt-10 shadow-sm max-h-16 h-full p-2">
+         <div class="w-full rounded-r-md border-l-4 border-indigo-400 mx-auto max-w-xl text-xs sm:text-sm text-center bg-gray-100 mt-10 shadow-sm max-h-16 h-full p-2">
                <p>🎀: Kamu dapat dengan mudah melanjutkan bacaan terakhir Kamu dari sini.</p>
          </div>
      </div>

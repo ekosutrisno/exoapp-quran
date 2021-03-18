@@ -19,7 +19,7 @@
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: rgba(16, 185, 129,1);
+  background: rgba(79, 70, 229,1);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {

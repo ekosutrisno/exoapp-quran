@@ -96,15 +96,19 @@ const account = {
     },
 
     async onMarkBacaanku({ commit }, payload) {
-      var user_id = auth.currentUser.uid;
-      await firestore
-        .collection("account")
-        .doc(user_id)
-        .set({ bacaanku: payload.nextBacaan }, { merge: true })
-        .then(async () => {
-          commit("SET_BACAANKU", payload.nextBacaan);
-          toast.info(`Ditandai sebagai Bacaanku.`);
-        });
+      var user_id = auth.currentUser ? auth.currentUser.uid : null;
+      if (user_id) {
+        await firestore
+          .collection("account")
+          .doc(user_id)
+          .set({ bacaanku: payload.nextBacaan }, { merge: true })
+          .then(async () => {
+            commit("SET_BACAANKU", payload.nextBacaan);
+            toast.info(`Ditandai sebagai Bacaanku.`);
+          });
+      } else {
+        toast.warning(`Fitur ini hanya aktif setelah Login!`);
+      }
     },
 
     async onGetBacaanku({ commit }) {
@@ -121,27 +125,31 @@ const account = {
     },
 
     async onMarkFavorit({ dispatch }, payload) {
-      var user_id = auth.currentUser.uid;
-      await firestore
-        .collection("account")
-        .doc(user_id)
-        .collection("favorits")
-        .doc(payload.aya_id.toString())
-        .get()
-        .then(async (doc) => {
-          if (!doc.exists) {
-            await firestore
-              .collection("account")
-              .doc(user_id)
-              .collection("favorits")
-              .doc(payload.aya_id.toString())
-              .set(payload)
-              .then(() => {
-                dispatch("onGetFavorit");
-                toast.info(`Ditambahkan ke favorit.`);
-              });
-          }
-        });
+      var user_id = auth.currentUser ? auth.currentUser.uid : null;
+      if (user_id) {
+        await firestore
+          .collection("account")
+          .doc(user_id)
+          .collection("favorits")
+          .doc(payload.aya_id.toString())
+          .get()
+          .then(async (doc) => {
+            if (!doc.exists) {
+              await firestore
+                .collection("account")
+                .doc(user_id)
+                .collection("favorits")
+                .doc(payload.aya_id.toString())
+                .set(payload)
+                .then(() => {
+                  dispatch("onGetFavorit");
+                  toast.info(`Ditambahkan ke favorit.`);
+                });
+            }
+          });
+      } else {
+        toast.warning(`Fitur ini hanya aktif setelah Login!`);
+      }
     },
 
     async onGetFavorit({ commit }) {
