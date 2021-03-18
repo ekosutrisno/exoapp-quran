@@ -34,7 +34,7 @@ const ayatFilter = {
               .collection("ayah_collections")
               .orderBy("aya_id", "asc")
               .startAt(initialAyat)
-              .limit(25)
+              .limit(20)
               .get()
               .then((ayats) => {
                 var lastVisible = ayats.docs[ayats.docs.length - 1];
@@ -76,7 +76,7 @@ const ayatFilter = {
         .collection("ayah_collections")
         .orderBy("aya_id", "asc")
         .startAfter(state.last_ayat)
-        .limit(25);
+        .limit(20);
 
       next.get().then((doc) => {
         var lastVisible = doc.docs[doc.docs.length - 1];

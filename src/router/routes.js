@@ -1,5 +1,6 @@
 import HomePage from "../views/HomePage.vue";
 import MenuPage from "../views/MenuPage.vue";
+import AboutPage from "../views/AboutPage.vue";
 import QuranMetaList from "../views/QuranMetaList.vue";
 import QuranPageList from "../views/QuranPageList.vue";
 import QuranJuzList from "../views/QuranJuzList.vue";
@@ -20,6 +21,11 @@ const routes = [
     path: "/",
     name: "HomePage",
     component: HomePage,
+  },
+  {
+    path: "/about",
+    name: "AboutPage",
+    component: AboutPage,
   },
   {
     path: "/menu",

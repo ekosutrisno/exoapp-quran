@@ -1,5 +1,5 @@
 <template>
-   <div class="h-screen bg-gray-200 flex items-center flex-col">
+   <div class="h-screen bg-gray-200 nv-transition flex items-center flex-col">
       <div class="flex-none relative  flex items-end flex-shrink-0 w-full bg-gray-900 shadow-lg h-1/4">
          <div class="absolute top-4 left-4 font-semibold text-gray-200 text-xl">E-Qur'an</div>
          <div class="bg-white h-16 z-50 mx-auto p-4 shadow-sm absolute left-4 -bottom-10 rounded-lg">
@@ -42,7 +42,7 @@
                <input v-model="aNumber" type="number" min="1" class="rounded-md py-2 px-3 w-24 bg-transparent bg-gray-100 ring-1 ring-gray-300 focus:outline-none focus:bg-gray-100" placeholder="1">
             </div>
             <div>
-               <button @click="doSearch" class="py-2 px-3 inline-flex items-center justify-center space-x-2 transition rounded-lg bg-green-500 hover:bg-green-600 text-gray-100 focus:outline-none">
+               <button @click="doSearch" class="py-2 px-3 inline-flex items-center justify-center space-x-2 transition rounded-lg bg-indigo-500 hover:bg-indigo-600 text-gray-100 focus:outline-none">
                   <span>Cari</span> 
                </button>
             </div>
@@ -155,6 +155,13 @@ export default {
                title: 'Tajwid',
                desc:'Belajar tajwid',
                to:'/tajwid-page'
+            },
+            {
+               menuId:'3855c7fd-53d1-4e50-8ebf-f32afe7e3869',
+               img:'https://i.pinimg.com/236x/09/e4/40/09e44047a4b820aa52235c9af1d67602.jpg',
+               title: 'Info',
+               desc:'Tentang Applikasi',
+               to:'/about'
             }
          ]
      });

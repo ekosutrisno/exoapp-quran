@@ -65,7 +65,7 @@
                </div>
             </router-link>
          </div>
-         <div class="w-full mx-auto max-w-lg text-xs rounded-md text-center bg-gray-100 mt-10 shadow-sm max-h-16 h-full p-2">
+         <div class="w-full mx-auto max-w-xl text-xs sm:text-sm rounded-r-md border-l-4 border-indigo-400 text-center bg-gray-100 mt-10 shadow-sm max-h-16 h-full p-2">
                <p>✨: Kamu dapat menyimpan ayat-ayat favorit disini.</p>
          </div>
      </div>
