@@ -52,6 +52,38 @@ const ayatFilter = {
           }
         });
     },
+    setAyatDetailBacaan({ commit, dispatch }, payload) {
+      firestore
+        .collection("ayah_collections")
+        .where("sura_id", "==", parseInt(payload.surat))
+        .where("aya_number", "==", parseInt(payload.ayat))
+        .get()
+        .then((aya) => {
+          if (aya.docs.length > 0) {
+            var initialAyat = aya.docs[0];
+
+            firestore
+              .collection("ayah_collections")
+              .orderBy("aya_id", "asc")
+              .startAfter(initialAyat)
+              .limit(20)
+              .get()
+              .then((ayats) => {
+                var lastVisible = ayats.docs[ayats.docs.length - 1];
+                dispatch("setLastAyat", lastVisible);
+
+                let dataAyah = [];
+
+                ayats.forEach((ayat) => {
+                  dataAyah.push(ayat.data());
+                });
+
+                commit("SET_AYAT", dataAyah);
+                commit("SET_IS_LOADING", false);
+              });
+          }
+        });
+    },
 
     setSuratDetail({ commit, dispatch }, payload) {
       commit("SET_IS_LOADING", true);
@@ -65,7 +97,12 @@ const ayatFilter = {
             const surat_detail = doc.data();
 
             commit("SET_SURAT", surat_detail);
-            dispatch("setAyatDetail", payload);
+
+            if (payload.bacaan) {
+              dispatch("setAyatDetailBacaan", payload);
+            } else {
+              dispatch("setAyatDetail", payload);
+            }
           }
         });
     },

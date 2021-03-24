@@ -89,7 +89,9 @@ export default {
       const router = useRouter();
 
       const state = reactive({
-         isProcess: computed(()=> store.state.filterAyat.isLoading),
+         isProcess: route.query.sajda === 'true'
+         ? computed(()=> store.state.ayat.isLoading)
+         : computed(()=> store.state.filterAyat.isLoading),
          isPush: computed(()=> store.state.filterAyat.isPush),
          surah: route.query.sajda === 'true' 
          ? computed(()=> store.state.ayat.surat_detail)
@@ -105,7 +107,8 @@ export default {
       const getSurahDetail = async () =>{
          var payload = {
             surat:route.query.sn,
-            ayat: route.query.an
+            ayat: route.query.an,
+            bacaan: route.query.next_bacaan === 'true' ? true : false
          }
 
          if (route.query.sajda === 'true') {
