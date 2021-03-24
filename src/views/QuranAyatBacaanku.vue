@@ -108,7 +108,7 @@ export default {
       })
 
       const onLanjutBacaan = ()=>{
-         router.push({name: 'QuranAyatDetail', query:{ sn: state.ayats.sura_id, an: state.ayats.aya_number}})
+         router.push({name: 'QuranAyatDetail', query:{ sn: state.ayats.sura_id, an: state.ayats.aya_number, next_bacaan: true}})
       }
 
       const convertToArab = (str) => {
